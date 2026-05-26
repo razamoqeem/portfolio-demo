@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AMK Digital Agency — AntiGravity SEO Suite | Live Demo Sandbox</title>
+  <meta name="description" content="AMK Digital Agency AntiGravity SEO Suite — Experience our AI-powered SEO audit, title generator, article writer, and semantic search engine. Interactive client presentation demo." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ══════════════════════════════════════════════════════════════
+       AMK DIGITAL AGENCY — ANTIGRAVITY SEO SUITE DEMO
+       Self-Contained Static Demo Layer | © AMK Digital Agency 2026
+    ══════════════════════════════════════════════════════════════ */
+
+    /* ─── DESIGN TOKENS ─────────────────────────────────────────── */
+    :root {
+      --bg:              #000000;
+      --bg-alt:          #0A0A0F;
+      --bg-card:         #0f1424;
+      --surface:         rgba(20, 20, 28, 0.72);
+      --surface-strong:  rgba(15, 15, 22, 0.96);
+      --accent:          #818CF8;
+      --accent-light:    rgba(129, 140, 248, 0.14);
+      --accent-glow:     rgba(129, 140, 248, 0.40);
+      --accent-2:        #2DD4BF;
+      --accent-2-light:  rgba(45, 212, 191, 0.12);
+      --accent-warn:     #FF9F43;
+      --accent-error:    #FF6B6B;
+      --accent-success:  #1DD1A1;
+      --text:            #F8FAFC;
+      --text-soft:       #A1A1AA;
+      --text-muted:      #71717A;
+      --text-faint:      #3F3F46;
+      --border:          rgba(255, 255, 255, 0.08);
+      --border-strong:   rgba(255, 255, 255, 0.15);
+      --border-accent:   rgba(129, 140, 248, 0.30);
+      --shadow-sm:   0 2px 8px rgba(0, 0, 0, 0.4);
+      --shadow-md:   0 8px 32px rgba(0, 0, 0, 0.6);
+      --shadow-lg:   0 20px 60px rgba(0, 0, 0, 0.8);
+      --shadow-xl:   0 32px 80px rgba(0, 0, 0, 0.9);
+      --blur:        blur(20px);
+      --blur-sm:     blur(10px);
+      --radius-sm:   8px;
+      --radius-md:   16px;
+      --radius-lg:   24px;
+      --radius-xl:   32px;
+      --radius-full: 9999px;
+      --font-body:    'Inter', system-ui, sans-serif;
+      --font-heading: 'Poppins', system-ui, sans-serif;
+      --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+      --t-base: 0.25s;
+      --t-slow: 0.4s;
+      --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ─── RESET ─────────────────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, h5 {
+      font-family: var(--font-heading);
+      line-height: 1.15;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    h1 { font-size: clamp(38px, 6vw, 76px); font-weight: 800; }
+    h2 { font-size: clamp(26px, 3.5vw, 48px); font-weight: 700; }
+    h3 { font-size: clamp(18px, 2.2vw, 26px); font-weight: 700; }
+    p { color: var(--text-soft); line-height: 1.75; }
+    a { color: var(--accent); text-decoration: none; transition: color var(--t-base); }
+    a:hover { color: var(--text); }
+    strong { font-weight: 700; color: var(--text); }
+    ul, ol { list-style: none; }
+    img, video, svg { display: block; max-width: 100%; }
+    button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+    input, select, textarea { font-family: var(--font-body); }
+
+    /* ─── SCROLLBAR ──────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(129,140,248,0.3); border-radius: var(--radius-full); }
+
+    /* ─── KEYFRAMES ──────────────────────────────────────────────── */
+    @keyframes fadeIn    { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeInScale { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+    @keyframes floatOrb  { 0%,100% { transform:translate(0,0) scale(1); } 33% { transform:translate(30px,-20px) scale(1.05); } 66% { transform:translate(-20px,15px) scale(0.97); } }
+    @keyframes pulseGlow { 0%,100% { opacity:0.6; } 50% { opacity:1; } }
+    @keyframes shimmer   { 0% { background-position:-400px 0; } 100% { background-position:400px 0; } }
+    @keyframes progressFill { from { width:0%; } }
+    @keyframes typewriter { from { width:0; } }
+    @keyframes blink     { 50% { border-color:transparent; } }
+    @keyframes spinSlow  { to { transform:rotate(360deg); } }
+    @keyframes liveRing  { 0%,100% { transform:scale(1); opacity:1; } 50% { transform:scale(1.8); opacity:0; } }
+
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
+    .reveal.active { opacity:1; transform:translateY(0); }
+    .reveal-left { opacity:0; transform:translateX(-28px); transition:opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
+    .reveal-left.active { opacity:1; transform:translateX(0); }
+    .reveal-right { opacity:0; transform:translateX(28px); transition:opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out); }
+    .reveal-right.active { opacity:1; transform:translateX(0); }
+    .stagger > *:nth-child(1) { transition-delay:0.05s; }
+    .stagger > *:nth-child(2) { transition-delay:0.12s; }
+    .stagger > *:nth-child(3) { transition-delay:0.19s; }
+    .stagger > *:nth-child(4) { transition-delay:0.26s; }
+    .stagger > *:nth-child(5) { transition-delay:0.33s; }
+    .stagger > *:nth-child(6) { transition-delay:0.40s; }
+
+    /* ─── LAYOUT ─────────────────────────────────────────────────── */
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+    /* ─── GLASS COMPONENTS ───────────────────────────────────────── */
+    .glass-card {
+      background: var(--surface);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      transition: transform var(--t-slow) var(--ease-spring),
+                  box-shadow var(--t-slow) var(--ease-smooth),
+                  border-color var(--t-base) var(--ease-smooth);
+    }
+    .glass-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-xl); border-color:var(--border-strong); }
+
+    /* ─── BUTTONS ────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 28px;
+      border-radius: var(--radius-full);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: transform var(--t-base) var(--ease-spring),
+                  box-shadow var(--t-base) var(--ease-smooth),
+                  background var(--t-base);
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .btn:active { transform: scale(0.97) !important; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #6366f1);
+      color: #fff;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 32px var(--accent-glow); color:#fff; }
+    .btn-ghost {
+      background: var(--surface);
+      backdrop-filter: var(--blur-sm);
+      color: var(--text);
+      border: 1px solid var(--border-strong);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-ghost:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); color:var(--text); background:rgba(255,255,255,0.08); }
+    .btn-sm { padding: 8px 18px; font-size: 13px; }
+
+    /* ─── BADGE ──────────────────────────────────────────────────── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .badge-accent  { background:var(--accent-light); color:var(--accent); border:1px solid rgba(129,140,248,0.2); }
+    .badge-teal    { background:var(--accent-2-light); color:var(--accent-2); border:1px solid rgba(45,212,191,0.2); }
+    .badge-success { background:rgba(29,209,161,0.12); color:var(--accent-success); border:1px solid rgba(29,209,161,0.25); }
+    .tag-core { background:rgba(29,209,161,0.1); color:#0dba8a; border:1px solid rgba(29,209,161,0.25); }
+    .tag-hot  { background:rgba(255,159,67,0.1); color:#d67f10; border:1px solid rgba(255,159,67,0.25); }
+    .tag-new  { background:rgba(129,140,248,0.12); color:var(--accent); border:1px solid var(--border-strong); }
+
+    /* ─── PROGRESS BAR ───────────────────────────────────────────── */
+    .progress-track { height:6px; background:rgba(255,255,255,0.08); border-radius:var(--radius-full); overflow:hidden; }
+    .progress-fill  { height:100%; background:linear-gradient(90deg,var(--accent),var(--accent-2)); border-radius:var(--radius-full); animation:progressFill 0.9s var(--ease-out) forwards; }
+
+    /* ─── SECTION LABEL ─────────────────────────────────────────── */
+    .section-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-header.centered { text-align:center; margin-bottom:48px; }
+    .section-header.centered p { max-width:600px; margin:16px auto 0; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       HEADER
+    ═══════════════════════════════════════════════════════════════ */
+    #site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border-bottom: 1px solid var(--border);
+      transition: background var(--t-base);
+    }
+    #site-header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      gap: 24px;
+    }
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .logo-icon {
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 900;
+      color: #fff;
+      font-family: var(--font-heading);
+    }
+    .logo-text { font-weight: 800; font-size: 17px; color: var(--text); }
+    .logo-sub  { font-size: 10px; font-weight: 400; color: var(--text-muted); display: block; line-height: 1; }
+
+    nav { display: flex; align-items: center; gap: 4px; }
+    nav a {
+      padding: 7px 14px;
+      border-radius: var(--radius-full);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-soft);
+      transition: background var(--t-base), color var(--t-base);
+    }
+    nav a:hover { background: rgba(255,255,255,0.06); color: var(--text); }
+
+    .header-cta { display:flex; align-items:center; gap:12px; }
+
+    /* Mobile nav */
+    #nav-toggle { display:none; }
+    @media (max-width: 768px) {
+      nav { display:none; }
+      nav.open { display:flex; flex-direction:column; position:fixed; top:68px; left:0; right:0; background:rgba(0,0,0,0.97); backdrop-filter:var(--blur); padding:20px 24px; border-bottom:1px solid var(--border); z-index:199; gap:4px; }
+      nav.open a { padding:14px 16px; border-radius:var(--radius-md); }
+      #nav-toggle { display:flex; align-items:center; justify-content:center; padding:8px; border-radius:var(--radius-sm); border:1px solid var(--border); color:var(--text-soft); }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+    }
+    .orb-1 { width:600px; height:600px; top:-100px; right:-150px; background:radial-gradient(circle, rgba(129,140,248,0.18) 0%, transparent 70%); animation:floatOrb 12s ease-in-out infinite; }
+    .orb-2 { width:500px; height:500px; bottom:-100px; left:-100px; background:radial-gradient(circle, rgba(45,212,191,0.12) 0%, transparent 70%); animation:floatOrb 15s ease-in-out infinite reverse; }
+    .orb-3 { width:400px; height:400px; top:40%; left:40%; background:radial-gradient(circle, rgba(129,140,248,0.08) 0%, transparent 70%); animation:floatOrb 20s ease-in-out infinite; }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap:40px; } }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+      padding: 6px 16px 6px 10px;
+      background: var(--accent-light);
+      border: 1px solid rgba(129,140,248,0.2);
+      border-radius: var(--radius-full);
+    }
+    .eyebrow-dot { width:8px; height:8px; background:var(--accent-success); border-radius:50%; animation:liveRing 2s ease-in-out infinite; }
+    .hero-content h1 { margin-bottom: 20px; }
+    .hero-content h1 em { font-style:normal; color:var(--accent); }
+    .hero-content > p { font-size:18px; margin-bottom: 36px; max-width: 480px; }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .stat-item { text-align:left; }
+    .stat-val  { font-family:var(--font-heading); font-size:28px; font-weight:800; color:var(--text); line-height:1; }
+    .stat-lab  { font-size:12px; color:var(--text-muted); font-weight:500; margin-top:4px; }
+
+    .hero-buttons { display:flex; gap:16px; flex-wrap:wrap; }
+
+    /* Hero Visual Card */
+    .hero-visual { display:flex; flex-direction:column; gap:16px; }
+    .hero-card-float {
+      background: var(--surface);
+      backdrop-filter: var(--blur);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-xl);
+      animation: fadeInScale 0.8s var(--ease-out) 0.3s both;
+    }
+    .hero-mini-row { display:flex; gap:12px; }
+    .hero-card-mini {
+      flex:1;
+      background: var(--surface);
+      backdrop-filter: var(--blur);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .live-dot-wrap { position:relative; width:10px; height:10px; flex-shrink:0; }
+    .live-dot { width:10px; height:10px; background:var(--accent-success); border-radius:50%; position:relative; z-index:2; }
+    .live-ring { position:absolute; inset:-3px; border-radius:50%; border:2px solid var(--accent-success); animation:liveRing 2s ease-in-out infinite; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       TRUST BAR
+    ═══════════════════════════════════════════════════════════════ */
+    .trust-bar {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+    }
+    .trust-bar .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .trust-label { font-size:11px; text-transform:uppercase; letter-spacing:0.12em; color:var(--text-muted); font-weight:700; }
+    .trust-item  { font-weight:800; opacity:0.35; font-family:var(--font-heading); font-size:15px; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION: ABOUT / VISION
+    ═══════════════════════════════════════════════════════════════ */
+    section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+
+    #vision .vision-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 56px;
+    }
+    .vision-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .vision-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      backdrop-filter: var(--blur);
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--t-slow) var(--ease-spring), border-color var(--t-base);
+    }
+    .vision-card:hover { transform:translateY(-5px); border-color:var(--border-strong); }
+    .vision-icon { font-size: 36px; margin-bottom: 20px; }
+    .vision-card h3 { font-size:20px; margin-bottom:12px; }
+    .vision-card p  { font-size:14px; line-height:1.65; flex-grow:1; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION: ABOUT
+    ═══════════════════════════════════════════════════════════════ */
+    #about .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    @media (max-width: 880px) { #about .about-grid { grid-template-columns:1fr; gap:40px; } }
+    .pull-quote {
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 20px 24px;
+      margin-top: 32px;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--text-soft);
+    }
+    .credential-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .credential-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      text-align: center;
+    }
+    .cred-val { font-family:var(--font-heading); font-size:32px; font-weight:800; color:var(--accent); }
+    .cred-lab { font-size:12px; color:var(--text-muted); margin-top:4px; font-weight:500; }
+    .methodology-box {
+      margin-top: 24px;
+      padding: 20px 24px;
+      background: var(--accent-light);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(129,140,248,0.15);
+    }
+    .methodology-box .method-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .check-item { display:flex; align-items:center; gap:10px; font-size:14px; color:var(--text-soft); padding: 4px 0; }
+    .check-item span.ck { color:var(--accent-success); font-size:16px; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION: SERVICES
+    ═══════════════════════════════════════════════════════════════ */
+    #services { background: var(--bg-alt); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      backdrop-filter: var(--blur);
+      transition: transform var(--t-slow) var(--ease-spring), border-color var(--t-base);
+    }
+    .service-card:hover { transform:translateY(-5px); border-color:var(--border-accent); }
+    .service-icon { width:56px; height:56px; border-radius:var(--radius-md); background:var(--accent-light); display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:18px; }
+    .service-icon.teal { background:var(--accent-2-light); }
+    .service-icon.warn { background:rgba(255,159,67,0.12); }
+    .service-title-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+    .service-card h4 { font-size:18px; margin:0; }
+    .service-card p  { font-size:14px; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION: INTERACTIVE DEMO LAB
+    ═══════════════════════════════════════════════════════════════ */
+    #demo-lab { background: var(--bg); }
+    .lab-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .lab-tab {
+      padding: 12px 28px;
+      border-radius: var(--radius-full);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-soft);
+      transition: all var(--t-base);
+    }
+    .lab-tab.active, .lab-tab:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .lab-panel {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      max-width: 840px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-md);
+      backdrop-filter: var(--blur);
+      animation: fadeInScale 0.3s var(--ease-out);
+    }
+    .lab-panel.active { display: block; }
+
+    /* Form elements in lab */
+    .lab-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .lab-input {
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+      transition: border-color var(--t-base), box-shadow var(--t-base);
+      margin-bottom: 16px;
+    }
+    .lab-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
+    .lab-input::placeholder { color: var(--text-faint); }
+    .lab-select {
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+      cursor: pointer;
+      margin-bottom: 16px;
+      appearance: none;
+    }
+    .lab-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--accent), #6366f1);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform var(--t-base), box-shadow var(--t-base), opacity var(--t-base);
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    .lab-btn:hover { transform:translateY(-2px); box-shadow:0 8px 32px var(--accent-glow); }
+    .lab-btn:active { transform:scale(0.98); }
+    .lab-btn:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
+
+    /* URL Command Bar (Audit) */
+    .command-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid var(--accent);
+      border-radius: var(--radius-md);
+      padding: 8px 8px 8px 18px;
+      margin-bottom: 24px;
+      transition: box-shadow var(--t-base);
+    }
+    .command-bar:focus-within { box-shadow: 0 0 0 3px var(--accent-light); }
+    .command-bar .url-icon { font-size:18px; opacity:0.7; flex-shrink:0; }
+    .command-bar input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      padding: 10px 8px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      outline: none;
+    }
+    .command-bar input::placeholder { color: var(--text-faint); }
+    .command-bar button {
+      background: linear-gradient(135deg, var(--accent), #6366f1);
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 12px 22px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform var(--t-base), box-shadow var(--t-base);
+      flex-shrink: 0;
+    }
+    .command-bar button:hover { transform:translateY(-1px); box-shadow:0 4px 16px var(--accent-glow); }
+
+    /* Console output */
+    .console-output {
+      display: none;
+      background: #030509;
+      border: 1px solid rgba(129,140,248,0.2);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      margin-top: 20px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--accent-success);
+      white-space: pre-wrap;
+      line-height: 1.7;
+      min-height: 80px;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+    .loader-row {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      margin-top: 20px;
+      padding: 14px 18px;
+      background: var(--accent-light);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .loader-spinner {
+      width: 16px; height: 16px;
+      border: 2px solid rgba(129,140,248,0.3);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spinSlow 0.8s linear infinite;
+      flex-shrink: 0;
+    }
+
+    /* Keyword Suggestion Dropdown */
+    .suggest-wrap { position:relative; }
+    .suggest-popup {
+      position: absolute;
+      top: calc(100% - 12px);
+      left: 0; right: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      max-height: 220px;
+      overflow-y: auto;
+      display: none;
+      z-index: 50;
+      box-shadow: var(--shadow-xl);
+    }
+    .suggest-row {
+      padding: 12px 18px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--text-soft);
+      border-bottom: 1px solid var(--border);
+      transition: background var(--t-base), color var(--t-base);
+    }
+    .suggest-row:hover { background: rgba(129,140,248,0.08); color: var(--accent); }
+    .suggest-row:last-child { border-bottom: none; }
+
+    /* Result card in output */
+    .result-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .result-pill {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 4px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION: PRICING
+    ═══════════════════════════════════════════════════════════════ */
+    #pricing { background: var(--bg-alt); }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .pricing-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      backdrop-filter: var(--blur);
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--t-slow) var(--ease-spring);
+      position: relative;
+    }
+    .pricing-card:hover { transform:translateY(-6px); }
+    .pricing-card.featured {
+      border-color: var(--accent);
+      box-shadow: 0 0 40px rgba(129,140,248,0.15);
+      transform: translateY(-8px);
+    }
+    .pricing-card.featured:hover { transform:translateY(-14px); }
+    .featured-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, var(--accent-2), var(--accent));
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 18px;
+      border-radius: var(--radius-full);
+    }
+    .price-name  { font-size:22px; font-weight:800; color:var(--accent); margin-bottom:8px; }
+    .price-desc  { font-size:13px; color:var(--text-muted); margin-bottom:24px; min-height:36px; }
+    .price-amount { display:flex; align-items:baseline; gap:4px; margin-bottom:28px; }
+    .price-amount span:first-child { font-family:var(--font-heading); font-size:48px; font-weight:800; color:var(--text); }
+    .price-amount .per { font-size:14px; color:var(--text-muted); font-weight:600; }
+    .price-features { list-style:none; display:flex; flex-direction:column; gap:12px; flex-grow:1; margin-bottom:28px; }
+    .price-features li { display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--text-soft); }
+    .price-features li .icon { font-size:16px; flex-shrink:0; }
+    .price-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--radius-full);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all var(--t-base);
+    }
+    .price-btn.outline {
+      background: transparent;
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+    }
+    .price-btn.outline:hover { background:var(--accent-light); }
+    .price-btn.solid {
+      background: linear-gradient(135deg, var(--accent), #6366f1);
+      color: #fff;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    .price-btn.solid:hover { transform:translateY(-2px); box-shadow:0 8px 30px var(--accent-glow); }
+
+    .pricing-cta {
+      margin-top: 48px;
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
+      background: linear-gradient(135deg, #1e1b4b, #0f172a);
+      border: 1px solid rgba(129,140,248,0.2);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .pricing-cta::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(129,140,248,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .pricing-cta h3 { font-size:28px; margin-bottom:12px; position:relative; }
+    .pricing-cta p  { font-size:15px; color:rgba(200,200,230,0.7); max-width:500px; margin:0 auto 28px; position:relative; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION: CONTACT
+    ═══════════════════════════════════════════════════════════════ */
+    #contact { background:var(--bg); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 64px;
+      align-items: start;
+    }
+    @media (max-width: 880px) { .contact-grid { grid-template-columns:1fr; gap:40px; } }
+    .contact-info-item { display:flex; align-items:flex-start; gap:16px; }
+    .contact-icon {
+      width: 44px; height: 44px;
+      background: var(--accent-light);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .contact-info-item .info strong { font-size:13px; color:var(--text); display:block; margin-bottom:4px; }
+    .contact-info-item .info a { font-size:14px; color:var(--text-soft); }
+    .contact-info-item .info a:hover { color:var(--accent); }
+    .contact-items { display:flex; flex-direction:column; gap:20px; margin-top:32px; }
+
+    .form-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      backdrop-filter: var(--blur);
+    }
+    .form-group { margin-bottom:16px; }
+    .form-label { display:block; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-muted); margin-bottom:8px; }
+    .form-input {
+      width: 100%;
+      padding: 13px 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+      transition: border-color var(--t-base), box-shadow var(--t-base);
+    }
+    .form-input:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-light); }
+    .form-input::placeholder { color:var(--text-faint); }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    @media (max-width:540px) { .form-row { grid-template-columns:1fr; } }
+
+    /* ═══════════════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════════════ */
+    #site-footer {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      padding: 72px 0 36px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    @media (max-width:768px) { .footer-grid { grid-template-columns:1fr 1fr; } }
+    @media (max-width:480px) { .footer-grid { grid-template-columns:1fr; } }
+    .footer-brand p { font-size:14px; margin-top:16px; }
+    .footer-col h5 { font-size:13px; font-weight:700; color:var(--text); margin-bottom:16px; letter-spacing:0.04em; }
+    .footer-col a  { display:block; font-size:14px; color:var(--text-muted); margin-bottom:10px; transition:color var(--t-base); }
+    .footer-col a:hover { color:var(--accent); }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      font-size: 13px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECURE FOOTER
+    ═══════════════════════════════════════════════════════════════ */
+    .secure-banner {
+      margin: 0 24px;
+      background: rgba(239,68,68,0.06);
+      border: 1px dashed rgba(239,68,68,0.3);
+      border-radius: var(--radius-lg);
+      padding: 32px 40px;
+      text-align: center;
+    }
+    .secure-banner h4 { color:#fca5a5; font-size:15px; margin-bottom:8px; }
+    .secure-banner p  { font-size:13px; color:var(--text-muted); margin-bottom:20px; }
+    .secure-btn {
+      display: inline-block;
+      background: #ef4444;
+      color: #fff;
+      font-weight: 700;
+      padding: 12px 28px;
+      border-radius: var(--radius-full);
+      font-size: 14px;
+      transition: background var(--t-base), transform var(--t-base);
+    }
+    .secure-btn:hover { background:#dc2626; transform:translateY(-2px); color:#fff; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       TOAST
+    ═══════════════════════════════════════════════════════════════ */
+    #toast-container {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .toast {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface-strong);
+      backdrop-filter: var(--blur);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      box-shadow: var(--shadow-xl);
+      animation: fadeIn 0.3s var(--ease-out);
+      min-width: 260px;
+    }
+    .toast.success { border-left: 3px solid var(--accent-success); }
+    .toast.info    { border-left: 3px solid var(--accent); }
+
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header id="site-header">
+  <div class="container">
+    <a href="#hero" class="logo-wrap">
+      <div class="logo-icon">AG</div>
+      <div>
+        <span class="logo-text">AMK <span style="font-weight:500; color:var(--text-muted); font-size:14px;">Digital Agency</span></span>
+        <span class="logo-sub">© 2026</span>
+      </div>
+    </a>
+
+    <nav id="main-nav">
+      <a href="#vision">Vision</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#demo-lab">Demo Lab</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="header-cta">
+      <a href="#contact" class="btn btn-primary btn-sm">Book Strategy Call</a>
+      <button id="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span class="eyebrow-dot"></span>
+          AI-Powered Agency Intelligence — 2026
+        </div>
+        <h1>AntiGravity<br /><em>SEO Suite</em></h1>
+        <p>Proprietary 8-pillar SEO forensics, E-E-A-T intelligence, and AI-Search architecture — engineered to turn traffic into trust and trust into revenue.</p>
+
+        <div class="hero-stats stagger">
+          <div class="stat-item">
+            <div class="stat-val" id="stat-audits">0+</div>
+            <div class="stat-lab">Audits Completed</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val" id="stat-lift">0%</div>
+            <div class="stat-lab">Avg. Traffic Lift</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-val">AI MODELS</div>
+            <div class="stat-lab">Proprietary Integrated</div>
+          </div>
+        </div>
+
+        <div class="hero-buttons">
+          <a href="#demo-lab" class="btn btn-primary" id="hero-cta-demo">▶ Launch Live Demo</a>
+          <a href="#contact" class="btn btn-ghost" id="hero-cta-call">Book Strategy Call</a>
+        </div>
+      </div>
+
+      <!-- Visual Hero Card -->
+      <div class="hero-visual reveal-right">
+        <div class="hero-card-float">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+            <span style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;">SEO Health Score</span>
+            <span class="badge badge-success">Live Audit</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:20px;margin-bottom:20px;">
+            <div id="hero-score-ring" style="width:90px;height:90px;position:relative;flex-shrink:0;">
+              <svg width="90" height="90" style="transform:rotate(-90deg)">
+                <circle cx="45" cy="45" r="37" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="6"/>
+                <circle id="score-arc" cx="45" cy="45" r="37" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-dasharray="232.5" stroke-dashoffset="232.5"/>
+              </svg>
+              <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                <span style="font-family:var(--font-heading);font-size:22px;font-weight:800;color:var(--text);">90</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-family:var(--font-heading);font-size:38px;font-weight:800;color:var(--text);line-height:1;">90</div>
+              <div style="font-size:12px;color:var(--accent-success);font-weight:600;margin-top:4px;">↑ +14 pts this month</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;"><span style="color:var(--text-muted);">On-Page</span><span style="font-weight:700;">92%</span></div>
+              <div class="progress-track"><div class="progress-fill" style="width:92%;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;"><span style="color:var(--text-muted);">Technical</span><span style="font-weight:700;">88%</span></div>
+              <div class="progress-track"><div class="progress-fill" style="width:88%;animation-delay:0.2s;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px;"><span style="color:var(--text-muted);">Authority</span><span style="font-weight:700;">90%</span></div>
+              <div class="progress-track"><div class="progress-fill" style="width:90%;animation-delay:0.4s;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-mini-row">
+          <div class="hero-card-mini">
+            <span style="font-size:22px;">🔗</span>
+            <div>
+              <div style="font-weight:700;font-size:13px;">342 Backlinks</div>
+              <div style="font-size:11px;color:var(--text-muted);">67 Referring Domains</div>
+            </div>
+          </div>
+          <div class="hero-card-mini">
+            <div class="live-dot-wrap">
+              <div class="live-dot"></div>
+              <div class="live-ring"></div>
+            </div>
+            <span style="font-weight:700;font-size:12px;">Engine Active</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ TRUST BAR ═══════════════ -->
+<div class="trust-bar">
+  <div class="container">
+    <span class="trust-label">Powered by</span>
+    <span class="trust-item">GPT-4o</span>
+    <span class="trust-item">Claude 3.5</span>
+    <span class="trust-item">Gemini 1.5</span>
+    <span class="trust-item">NVIDIA Nemotron</span>
+    <span class="trust-item">DeepSeek R1</span>
+  </div>
+</div>
+
+<!-- ═══════════════ VISION ═══════════════ -->
+<section id="vision">
+  <div class="container">
+    <div class="vision-header reveal">
+      <div class="section-label">Who We Are</div>
+      <h2>AMK Agency</h2>
+      <p style="font-size:17px;font-weight:600;color:var(--accent);margin:10px 0 16px;">The AI-Driven Growth Architecture</p>
+      <p>We are an AI-based digital marketing and SEO agency. We build predictive SEO operating systems that synchronize with Generative Search Engines, LLM crawlers, and traditional indexes to achieve organic prominence.</p>
+    </div>
+    <div class="vision-grid stagger">
+      <div class="vision-card reveal">
+        <div class="vision-icon">👁️</div>
+        <h3>Our Vision</h3>
+        <p>To lead the next epoch of SXO and GEO. We envision a future where digital authority is engineered through clear credibility signals, semantic alignment, and absolute transparency.</p>
+      </div>
+      <div class="vision-card reveal">
+        <div class="vision-icon">🎯</div>
+        <h3>Our Purpose</h3>
+        <p>To solve the digital trust deficit. Modern searchers and AI bots demand verification. We build high-fidelity data layers, schema hierarchies, and E-E-A-T strategies that bridge the trust gap.</p>
+      </div>
+      <div class="vision-card reveal">
+        <div class="vision-icon">⚡</div>
+        <h3>Our Goals</h3>
+        <p>Replace guesswork with empirical framework. Establish robust content structures, resolve technical crawls perfectly, maximize search index presence, and guarantee sustainable growth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal-left">
+        <div class="section-label">About AMK</div>
+        <h2>The Science of Trust in AI‑Search</h2>
+        <p style="margin:20px 0;">Our approach is grounded in published research on how AI-generated content influences consumer trust. The gap between organic traffic and actual conversion is not a marketing problem — it is a <strong>credibility architecture problem</strong>.</p>
+        <p>We engineered the AMK OS to systematically close that gap. By mapping every page to the E-E-A-T framework, aligning content to verified search intent, and engineering LLM trust signals into the site's semantic layer, we transform passive visitors into qualified leads.</p>
+        <div class="pull-quote">
+          "Websites that demonstrate Experience, Expertise, Authoritativeness, and Trustworthiness consistently outperform competitors by 2.3× in AI-overview citation frequency."
+          <br /><small style="color:var(--text-muted);margin-top:8px;display:block;">— AMK Agency Intelligence Research, 2026</small>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="credential-grid stagger">
+          <div class="credential-card reveal">
+            <div class="cred-val">340+</div>
+            <div class="cred-lab">SEO Audits Delivered</div>
+          </div>
+          <div class="credential-card reveal">
+            <div class="cred-val">47%</div>
+            <div class="cred-lab">Avg. Organic Lift</div>
+          </div>
+          <div class="credential-card reveal">
+            <div class="cred-val">8</div>
+            <div class="cred-lab">AI Pillars Active</div>
+          </div>
+          <div class="credential-card reveal">
+            <div class="cred-val">4</div>
+            <div class="cred-lab">Years Agency Experience</div>
+          </div>
+        </div>
+        <div class="methodology-box">
+          <div class="method-label">Core Methodology</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div class="check-item"><span class="ck">✓</span> Technical Crawl + Core Web Vitals Audit</div>
+            <div class="check-item"><span class="ck">✓</span> E-E-A-T Signal Architecture</div>
+            <div class="check-item"><span class="ck">✓</span> AI-Search (GEO) Optimization</div>
+            <div class="check-item"><span class="ck">✓</span> Topical Authority Cluster Strategy</div>
+            <div class="check-item"><span class="ck">✓</span> Monthly Performance Reporting</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SERVICES ═══════════════ -->
+<section id="services">
+  <div class="container">
+    <div class="section-header centered reveal">
+      <div class="section-label">What We Do</div>
+      <h2>6-Hub Agency Intelligence Suite</h2>
+      <p>Each intelligence hub is a specialized command center staffed by AI agents trained on agency best practices, Google Search Central guidelines, and proprietary client data.</p>
+    </div>
+    <div class="services-grid stagger">
+      <div class="service-card reveal">
+        <div class="service-icon">🚀</div>
+        <div class="service-title-row"><h4>SEO Engine</h4><span class="badge tag-core">CORE</span></div>
+        <p style="font-size:14px;">Technical, On-Page, Off-Page, Analytics, and Forensic URL Inspection. The backbone of every engagement.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon teal">🔵</div>
+        <div class="service-title-row"><h4>AI SEO / GEO</h4><span class="badge tag-new">NEW</span></div>
+        <p style="font-size:14px;">Generative Engine Optimization, AI Overview tracking, and LLM trust signal engineering for the AI-first search era.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon warn">📢</div>
+        <div class="service-title-row"><h4>Social & PPC</h4><span class="badge tag-hot">HOT</span></div>
+        <p style="font-size:14px;">Ad copywriting, creative generation, and PPC performance analysis across Google and Meta platforms.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">✉️</div>
+        <div class="service-title-row"><h4>Email Marketing</h4><span class="badge tag-core">CORE</span></div>
+        <p style="font-size:14px;">Campaign design, sequence engineering, and outreach strategy optimized for deliverability and conversion.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon warn">🎯</div>
+        <div class="service-title-row"><h4>Lead Generation</h4><span class="badge tag-hot">HOT</span></div>
+        <p style="font-size:14px;">Prospect identification, conversion funnel logic, and automated client hunting workflows.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🧠</div>
+        <div class="service-title-row"><h4>Strategy & Research</h4><span class="badge tag-core">CORE</span></div>
+        <p style="font-size:14px;">Competitor benchmarking, market analysis, and executive reporting. The strategic brain of the OS.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ INTERACTIVE DEMO LAB ═══════════════ -->
+<section id="demo-lab">
+  <div class="container">
+    <div class="section-header centered reveal">
+      <div class="section-label">Interactive Playground</div>
+      <h2>Growth Architecture Lab</h2>
+      <p>Test our freemium Title, Keyword, Audit, and Article engines instantly. No account required. Fully client-side intelligence simulation.</p>
+    </div>
+
+    <div class="lab-tabs" role="tablist">
+      <button class="lab-tab active" id="tab-audit"   onclick="switchTab('audit')"   role="tab" aria-selected="true">🔍 SEO Domain Audit</button>
+      <button class="lab-tab"        id="tab-keyword" onclick="switchTab('keyword')" role="tab">✦ Title & Keyword Generator</button>
+      <button class="lab-tab"        id="tab-article" onclick="switchTab('article')" role="tab">✍️ AI Article Writer</button>
+      <button class="lab-tab"        id="tab-docs"    onclick="switchTab('docs')"    role="tab">📚 Docs Search</button>
+    </div>
+
+    <!-- ─── PANEL 1: AUDIT ─── -->
+    <div class="lab-panel active" id="panel-audit">
+      <h3 style="margin-bottom:8px;">Enterprise SEO Domain Audit</h3>
+      <p style="font-size:14px;margin-bottom:24px;">Enter any domain to trigger an 8-pillar SEO forensic simulation powered by the AntiGravity Crawl Engine.</p>
+
+      <div class="command-bar">
+        <span class="url-icon">🌐</span>
+        <input type="url" id="audit-url-input" placeholder="Enter target domain (e.g. https://competitor.com)" value="https://example.com" id="auditUrlField" />
+        <button onclick="runAudit()" id="audit-run-btn">🚀 Scan Website Free</button>
+      </div>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:0;padding-left:4px;">⚡ Instant 8-pillar crawler audit. 100% free lead assessment. No credit card required.</p>
+
+      <div class="loader-row" id="audit-loader">
+        <div class="loader-spinner"></div>
+        <span>Scanning DOM hierarchy & checking schema injections...</span>
+      </div>
+      <div class="console-output" id="audit-output"></div>
+    </div>
+
+    <!-- ─── PANEL 2: KEYWORD / TITLE ─── -->
+    <div class="lab-panel" id="panel-keyword">
+      <h3 style="margin-bottom:8px;">Keyword & Title Generator</h3>
+      <p style="font-size:14px;margin-bottom:24px;">Input your seed market topic to synthesize high-value semantic clusters and conversion-optimized title blueprints.</p>
+
+      <div style="margin-bottom:16px;">
+        <label class="lab-label" for="kw-input">Seed Market Topic</label>
+        <input class="lab-input" type="text" id="kw-input" placeholder="e.g. real estate, ecommerce, logistics, SaaS" />
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+        <div>
+          <label class="lab-label" for="kw-type">Content Intent Profile</label>
+          <select class="lab-select" id="kw-type">
+            <option value="blog">In-Depth Blog Blueprint</option>
+            <option value="case">Data-Driven Case Study</option>
+            <option value="landing">High-Conversion Landing Page</option>
+          </select>
+        </div>
+        <div>
+          <label class="lab-label" for="kw-tone">Tone Alignment</label>
+          <select class="lab-select" id="kw-tone">
+            <option value="authoritative">Authoritative & Strategic</option>
+            <option value="educational">Data-Backed Educational</option>
+            <option value="creative">Creative & Disruptive</option>
+          </select>
+        </div>
+      </div>
+      <button class="lab-btn" onclick="runKeywordEngine()" id="kw-run-btn">Synthesize Semantics & Generate Titles</button>
+      <div class="loader-row" id="kw-loader">
+        <div class="loader-spinner"></div>
+        <span>Parsing user intent dictionary vectors...</span>
+      </div>
+      <div id="kw-output" style="display:none;margin-top:24px;border-top:1px solid var(--border);padding-top:20px;"></div>
+    </div>
+
+    <!-- ─── PANEL 3: ARTICLE ─── -->
+    <div class="lab-panel" id="panel-article">
+      <h3 style="margin-bottom:8px;">AI Article Content Streaming Engine</h3>
+      <p style="font-size:14px;margin-bottom:24px;">Enter a target keyphrase blueprint and watch our local Llama3 content array structure stream a full article outline in real-time.</p>
+
+      <div style="margin-bottom:16px;">
+        <label class="lab-label" for="article-input">Article Topic / Target Keyphrase</label>
+        <input class="lab-input" type="text" id="article-input" placeholder="e.g. Why E-E-A-T is Critical for Search Rankings in 2026" />
+      </div>
+      <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:16px;margin-bottom:16px;">
+        <div>
+          <label class="lab-label" for="article-kws">Target Keywords (comma-separated)</label>
+          <input class="lab-input" type="text" id="article-kws" placeholder="e.g. eeat checklist, search quality, content signals" />
+        </div>
+        <div>
+          <label class="lab-label" for="article-tone">Tone Profile</label>
+          <select class="lab-select" id="article-tone">
+            <option value="authoritative">Authoritative & Technical</option>
+            <option value="conversational">Engaging & Conversational</option>
+            <option value="educational">Educational & Informational</option>
+          </select>
+        </div>
+      </div>
+      <button class="lab-btn" onclick="runArticleStream()" id="article-run-btn">Stream Content Generation Blueprint</button>
+      <div class="loader-row" id="article-loader">
+        <div class="loader-spinner"></div>
+        <span>Initializing local Llama3 content array structures...</span>
+      </div>
+      <div class="console-output" id="article-output" style="min-height:200px;color:var(--text-soft);"></div>
+    </div>
+
+    <!-- ─── PANEL 4: DOCS SEARCH ─── -->
+    <div class="lab-panel" id="panel-docs">
+      <h3 style="margin-bottom:8px;">Documentation AI Hub & Auto-Suggest</h3>
+      <p style="font-size:14px;margin-bottom:24px;">Search the AntiGravity architecture knowledge base. Type any key token to surface relevant system documentation.</p>
+
+      <div class="suggest-wrap">
+        <label class="lab-label" for="docs-input">Search Architecture System Docs</label>
+        <input class="lab-input" type="text" id="docs-input" oninput="runDocsSearch()" placeholder="Type key tokens (e.g. automation, pipeline, python, schema, trust)..." style="margin-bottom:0;" />
+        <div class="suggest-popup" id="docs-popup"></div>
+      </div>
+      <div class="console-output" id="docs-output" style="margin-top:16px;"></div>
+    </div>
+
+  </div><!-- /container -->
+</section>
+
+<!-- ═══════════════ PRICING ═══════════════ -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-header centered reveal">
+      <div class="section-label">Investment Plans</div>
+      <h2>Choose Your Growth Engine</h2>
+      <p>Scale your agency with the right AI architecture. Upgrade, downgrade, or cancel anytime.</p>
+    </div>
+
+    <div class="pricing-grid stagger">
+      <div class="pricing-card reveal">
+        <div class="price-name">Basic</div>
+        <div class="price-desc">Essential Foundation — For solo consultants & local setups.</div>
+        <div class="price-amount"><span>$197</span><span class="per">/mo</span></div>
+        <ul class="price-features">
+          <li><span class="icon">✅</span><span><strong>5 Deep Audits</strong> / month</span></li>
+          <li><span class="icon">✅</span><span>Up to <strong>50 Pages</strong> per audit</span></li>
+          <li><span class="icon">✅</span><span><strong>5 Target Keywords</strong> tracking</span></li>
+          <li><span class="icon">✅</span><span>48-Hour Report Delivery</span></li>
+        </ul>
+        <button class="price-btn outline" onclick="showToast('Start your 7-day free trial — contact us to activate!', 'info')">Start 7-Day Trial</button>
+      </div>
+
+      <div class="pricing-card featured reveal">
+        <div class="featured-badge">Most Popular</div>
+        <div class="price-name">Pro</div>
+        <div class="price-desc">The Growth Engine — For active marketing agencies.</div>
+        <div class="price-amount"><span>$497</span><span class="per">/mo</span></div>
+        <ul class="price-features">
+          <li><span class="icon">🚀</span><span><strong>20 Deep Audits</strong> / month</span></li>
+          <li><span class="icon">🚀</span><span>Up to <strong>500 Pages</strong> per audit</span></li>
+          <li><span class="icon">🚀</span><span><strong>20 Target Keywords</strong> tracking</span></li>
+          <li><span class="icon">🚀</span><span>Competitor Backlink Analysis</span></li>
+          <li><span class="icon">🚀</span><span>15-Day Managed Fix Delivery</span></li>
+        </ul>
+        <button class="price-btn solid" onclick="showToast('Upgrade to Pro — book a strategy call to unlock!', 'info')">Upgrade to Pro</button>
+      </div>
+
+      <div class="pricing-card reveal">
+        <div class="price-name">Ultra</div>
+        <div class="price-desc">The Enterprise Architect — Scaled intelligence.</div>
+        <div class="price-amount"><span>$1,497</span><span class="per">/mo</span></div>
+        <ul class="price-features">
+          <li><span class="icon">🔥</span><span><strong>50 Deep Audits</strong> / month</span></li>
+          <li><span class="icon">🔥</span><span><strong>Unlimited Pages</strong> (Deep Crawl)</span></li>
+          <li><span class="icon">🔥</span><span><strong>100 Target Keywords</strong> tracking</span></li>
+          <li><span class="icon">🔥</span><span>White-Label PDF Exports</span></li>
+          <li><span class="icon">🔥</span><span>7-Day Priority Delivery SLA</span></li>
+        </ul>
+        <button class="price-btn outline" onclick="showToast('Scale with Ultra — enterprise deployment available!', 'info')">Scale with Ultra</button>
+      </div>
+    </div>
+
+    <div class="pricing-cta reveal">
+      <h3 style="color:#fff;">Need a Custom Digital Marketing Plan?</h3>
+      <p>Exceeding the Ultra tier? Our elite enterprise consultancy team designs bespoke, high-volume AI-driven growth architectures for global brands.</p>
+      <a href="#contact" class="btn btn-ghost" style="background:rgba(255,255,255,0.95);color:#1e1b4b;font-weight:800;border:none;">📅 Book a Strategy Call</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="reveal-left">
+        <div class="section-label">Immediate Assistance</div>
+        <h2>Direct <em style="font-style:normal;color:var(--accent);">Response</em></h2>
+        <p style="margin:16px 0 28px;">Have a quick question? Reach out directly. We maintain an active presence across all agency channels.</p>
+
+        <div class="contact-items">
+          <div class="contact-info-item">
+            <div class="contact-icon">📧</div>
+            <div class="info">
+              <strong>Email Support</strong>
+              <a href="mailto:ahmad@amkdigital.agency">ahmad@amkdigital.agency</a>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">📞</div>
+            <div class="info">
+              <strong>WhatsApp & Phone</strong>
+              <a href="tel:03131627125">+92 313 162 7125</a>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">💼</div>
+            <div class="info">
+              <strong>LinkedIn</strong>
+              <a href="https://www.linkedin.com/in/ahmad-raza-5000341ab/" target="_blank">linkedin.com/in/ahmad-raza</a>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">📍</div>
+            <div class="info">
+              <strong>Office Location</strong>
+              <a href="#">Lahore & Multan, Pakistan</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="methodology-box" style="margin-top:32px;">
+          <div class="method-label">What happens on the call?</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div class="check-item"><span class="ck">•</span> Deep Crawl data review and bottleneck identification.</div>
+            <div class="check-item"><span class="ck">•</span> Strategic mapping of Tier 1 SEO/AEO opportunities.</div>
+            <div class="check-item"><span class="ck">•</span> Implementation of a high-fidelity 60-day execution plan.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal-right">
+        <div class="form-panel">
+          <h3 style="font-size:22px;margin-bottom:8px;">Book a 1-on-1 Strategy Call</h3>
+          <p style="font-size:14px;margin-bottom:28px;">Qualify for a private consultation with our senior architects.</p>
+
+          <form id="contact-form" onsubmit="submitForm(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="cf-name">Full Name</label>
+                <input class="form-input" type="text" id="cf-name" placeholder="Ahmad Khan" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cf-email">Work Email</label>
+                <input class="form-input" type="email" id="cf-email" placeholder="you@agency.com" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cf-website">Company Website URL</label>
+              <input class="form-input" type="url" id="cf-website" placeholder="https://yoursite.com" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cf-goal">Primary Goal</label>
+              <select class="form-input" id="cf-goal" required>
+                <option value="">Select your primary objective...</option>
+                <option value="scale">Scale My Agency Engine</option>
+                <option value="franchise">Franchise Local SEO Deployment</option>
+                <option value="recovery">Recover from Critical Traffic Drop</option>
+                <option value="aeo-geo">AI-Search & GEO Optimization</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;padding:16px;font-size:15px;">Initiate Strategy Session →</button>
+          </form>
+
+          <div id="form-success" style="display:none;text-align:center;padding:32px 0;">
+            <div style="font-size:56px;margin-bottom:20px;">🚀</div>
+            <h3>Consultation Requested!</h3>
+            <p style="margin-top:12px;">Our team is reviewing your site data. You'll receive a booking link within 24 hours.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SECURITY ENVELOPE NOTICE ═══════════════ -->
+<div style="padding:32px 0;background:var(--bg-alt);border-top:1px solid var(--border);">
+  <div class="secure-banner" style="max-width:860px;margin:0 auto;">
+    <h4>🔒 Protected Local Execution Environment</h4>
+    <p>The core computational systems, database indexes, and custom automation scripts run entirely within our isolated environment to preserve source integrity. For production licenses or custom systems deployment, connect with our engineering team.</p>
+    <a class="secure-btn" href="mailto:ahmad@amkdigital.agency?subject=AntiGravity%20Production%20Suite%20Inquiry">Request Agency Deployment Audit</a>
+  </div>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer id="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-wrap" style="margin-bottom:8px;">
+          <div class="logo-icon">AG</div>
+          <span class="logo-text">AMK <span style="font-weight:500;color:var(--text-muted);font-size:14px;">Digital Agency</span></span>
+        </div>
+        <p>The AI-powered Digital Marketing Operating System. Built for agencies that refuse to settle for average results.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Platform</h5>
+        <a href="#services">Services</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#demo-lab">Live Demo</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Intelligence</h5>
+        <a href="#demo-lab">SEO Engine</a>
+        <a href="#demo-lab">AI / GEO Search</a>
+        <a href="#about">E-E-A-T Signals</a>
+        <a href="#services">Analytics OS</a>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <a href="#vision">Our Vision</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact Us</a>
+        <a href="mailto:ahmad@amkdigital.agency" style="font-size:13px;opacity:0.7;">ahmad@amkdigital.agency</a>
+        <a href="tel:03131627125" style="font-size:13px;opacity:0.7;">+92 313 162 7125</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 AMK Agency. All rights reserved.</span>
+      <span>Built with proprietary AI architecture.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════ TOAST CONTAINER ═══════════════ -->
+<div id="toast-container"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     INTELLIGENCE SIMULATION ENGINE (Static Data Vault)
+═══════════════════════════════════════════════════════════════ -->
+<script>
+"use strict";
+
+/* ─────────────────────────────────────────────────────────────────
+   STATIC DATA VAULT — AMK AntiGravity SEO Suite Demo
+   All simulated outputs served from this local JSON map.
+───────────────────────────────────────────────────────────────── */
+const VAULT = {
+
+  /* Audit simulation data */
+  audit: {
+    scores: { overall: 96, onpage: 92, technical: 88, authority: 90 },
+    log: (url) => `[AMK DIGITAL AUDIT RUNNER ENGINE v4.2]
+Target Profile   : ${url}
+Crawl Timestamp  : ${new Date().toISOString()}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[PHASE 1 — TECHNICAL CRAWL]
+[INFO]    Initiating headless DOM hierarchy scan...
+[SUCCESS] Robots.txt and XML canonical sitemap configurations perfectly aligned.
+[SUCCESS] Core Web Vitals: LCP 1.1s · FID 45ms · CLS 0.03 (All GREEN)
+[WARNING] Missing structured JSON-LD Schema on 3 product page routes.
+[SUCCESS] HTTPS enforcement and HSTS headers detected and verified.
+
+[PHASE 2 — ON-PAGE SIGNALS]
+[INFO]    Analyzing title tags and meta descriptions across 147 pages...
+[SUCCESS] 94% of title tags within optimal character range (50–60 chars).
+[WARNING] 12 pages missing unique H1 tags — flagged for content team.
+[SUCCESS] Image alt text coverage: 97% of indexed images optimized.
+
+[PHASE 3 — AUTHORITY & BACKLINK MATRIX]
+[INFO]    Querying backlink index...
+[SUCCESS] 342 total backlinks detected | 67 unique referring domains.
+[SUCCESS] Domain Authority trajectory: +14 points (last 90 days).
+[INFO]    Top anchor text distribution: branded (62%) | generic (24%) | keyword (14%)
+
+[PHASE 4 — AI-SEARCH (GEO) COMPLIANCE]
+[INFO]    Scanning for Generative Engine Optimization signals...
+[SUCCESS] E-E-A-T author markup detected on blog post templates.
+[WARNING] Missing FAQ schema on 8 high-priority informational pages.
+[SUCCESS] Entity disambiguation markup (Organization/Person) correctly deployed.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+COMPOSITE SYSTEM OPTIMIZATION RATING: 96 / 100
+[AMK SYSTEM] Full deep-crawl report available in the agency dashboard.
+    `
+  },
+
+  /* Semantic keyword clusters */
+  semantics: {
+    "real estate": {
+      phrases: ["automated real estate data pipelines", "hyperlocal search intent models", "programmatic luxury real estate indexing", "schema-optimized property listing strategy"],
+      titles: [
+        { cat: "Blog Blueprint",  t: "Maximizing Search Volume Traffic for Competitive Real Estate Assets in 2026" },
+        { cat: "Case Study",      t: "How Automated Semantic Clusters Dominate Suburban Broker Keyword Vaults" },
+        { cat: "Landing Page",    t: "AI-Powered Property SEO: Your Local Market Domination Toolkit" }
+      ]
+    },
+    "ecommerce": {
+      phrases: ["programmatic product structure scaling", "headless content index configurations", "long-tail keyword transactional modifiers", "conversion-optimized category schema"],
+      titles: [
+        { cat: "Blog Blueprint",  t: "How We Scaled an Enterprise E-commerce Pipeline to 200k Indexed Pages" },
+        { cat: "Case Study",      t: "Resolving Crawling Bottlenecks Within JavaScript-Heavy Storefront Layouts" },
+        { cat: "Landing Page",    t: "The E-commerce SEO Audit Checklist That Generated 340% Organic Revenue Lift" }
+      ]
+    },
+    "saas": {
+      phrases: ["SaaS product-led SEO architecture", "free trial conversion keyword clusters", "PLG content flywheel optimization", "intent-mapped feature page strategy"],
+      titles: [
+        { cat: "Blog Blueprint",  t: "Product-Led Growth SEO: How SaaS Brands Capture Bottom-of-Funnel Intent" },
+        { cat: "Case Study",      t: "SaaS Keyword Architecture: Mapping Free Trial Search Intent to Revenue" },
+        { cat: "Landing Page",    t: "The 2026 SaaS SEO Playbook: From Trial Signups to Enterprise Contracts" }
+      ]
+    },
+    "healthcare": {
+      phrases: ["YMYL healthcare content authority signals", "medical schema and structured data layers", "patient journey search intent mapping", "E-E-A-T signals for clinical content"],
+      titles: [
+        { cat: "Blog Blueprint",  t: "Why E-E-A-T is Non-Negotiable for Healthcare Content in the AI Search Era" },
+        { cat: "Case Study",      t: "Medical SEO Architecture: How We Ranked a Clinic Network for 180+ Procedures" },
+        { cat: "Landing Page",    t: "Trusted Healthcare SEO: Building Patient Confidence Through Search Authority" }
+      ]
+    },
+    "logistics": {
+      phrases: ["B2B logistics long-tail commercial keywords", "supply chain semantic content clusters", "fleet management intent modeling", "multi-location logistics schema markup"],
+      titles: [
+        { cat: "Blog Blueprint",  t: "Logistics SEO Playbook: Winning B2B Commercial Intent Across Supply Chain Verticals" },
+        { cat: "Case Study",      t: "How We Generated 287 Qualified Leads via Programmatic Logistics SEO" },
+        { cat: "Landing Page",    t: "Precision B2B Logistics SEO: Engineering Qualified Fleet Leads Through Search" }
+      ]
+    },
+    default: {
+      phrases: ["high-velocity programmatic entity mappings", "intent-driven search vertical blueprints", "advanced algorithmic search visibility indexing", "competitive moat content architecture"],
+      titles: [
+        { cat: "Blog Blueprint",  t: "Engineered Rankings: Overcoming Enterprise Competitor Technical Moats in 2026" },
+        { cat: "Case Study",      t: "The Technical Growth Blueprint: Scaling Corporate Search Capture Without Middleware" },
+        { cat: "Landing Page",    t: "AI-First SEO Architecture: How AMK Builds Search Authority at Scale" }
+      ]
+    }
+  },
+
+  /* Article streaming content */
+  article: {
+    intro: `## STRATEGIC CONTENT OPTIMIZATION BLUEPRINT
+Generated by AntiGravity Content Engine v3.0 | AMK Digital Agency
+
+### Executive Summary
+In the current search landscape, building organic web authority requires programmatic precision. Traditional keyword-stuffing methods fall short when scaling competitive directory spaces. By establishing clear entity relationships within web content structures, brands can capture high-intent queries directly.
+
+### Core SEO Architecture Roadmap
+1. **Establish Explicit Canonical Definitions** — Ensure canonical structural definitions span consistently across all page trees without competing signals.
+2. **Localized Schema Implementation** — Incorporate geo-targeted schema layouts to disambiguate page content for both crawlers and AI overview systems.
+3. **Internal Linking Architecture** — Optimize internal link flows based on topic importance and page conversion priority rather than arbitrary placement.
+4. **E-E-A-T Signal Integration** — Deploy author bio markup, expert citation patterns, and organizational verification schema across key conversion pages.
+
+### Semantic Content Cluster Strategy
+Topical authority is no longer an optional enhancement — it is a prerequisite for AI-overview inclusion. Build radial hub-and-spoke clusters around core commercial intents, ensuring each spoke page addresses a specific sub-query within the broader topic universe.
+
+### Recommended Next Steps
+- Complete a comprehensive 8-pillar technical audit of your current domain.
+- Identify content gap opportunities across your top 3 competitor sites.
+- Deploy structured content templates aligned to your primary keyword clusters.
+
+[AMK SYSTEM NOTICE] Full article generation with 2,500+ words, semantic keyword weaving, and meta data optimization is available via the authenticated AntiGravity suite. Request access from an AMK system administrator.`
+  },
+
+  /* Documentation index */
+  docs: [
+    { name: "Building High-Scale Search Automations via Pure Client-Side Frameworks", tags: ["automation", "framework", "javascript", "pipeline"] },
+    { name: "How AI-Generated Content Influences Long-Term Digital Consumer Trust Vectors", tags: ["trust", "marketing", "consumer", "ai", "content"] },
+    { name: "Configuring AntiGravity Local AI Pipeline via Specialized Execution Shells", tags: ["local ai", "pipeline", "configuration", "setup"] },
+    { name: "Programmatic Semantic Metadata Architecture and Schema Script Injections", tags: ["schema", "semantic", "metadata", "structured data"] },
+    { name: "E-E-A-T Signal Engineering: Comprehensive Implementation Framework", tags: ["eeat", "trust", "authority", "signals", "google"] },
+    { name: "GEO (Generative Engine Optimization) Technical Specification Guide", tags: ["geo", "generative", "ai", "llm", "optimization"] },
+    { name: "Keyword Cluster Architecture: Topical Authority Mapping at Scale", tags: ["keywords", "cluster", "topical", "authority", "mapping"] },
+    { name: "Core Web Vitals Optimization: LCP, FID, and CLS Engineering Handbook", tags: ["core web vitals", "lcp", "performance", "technical"] }
+  ]
+};
+
+/* ─────────────────────────────────────────────────────────────────
+   TAB SWITCHER
+───────────────────────────────────────────────────────────────── */
+function switchTab(name) {
+  document.querySelectorAll('.lab-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.lab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  document.getElementById('panel-' + name).classList.add('active');
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   SYSTEM ACTION 1 — AUDIT RUNNER
+───────────────────────────────────────────────────────────────── */
+function runAudit() {
+  const url = document.getElementById('audit-url-input').value.trim();
+  if (!url) { alert('Please enter a target domain URL.'); return; }
+
+  const btn    = document.getElementById('audit-run-btn');
+  const loader = document.getElementById('audit-loader');
+  const output = document.getElementById('audit-output');
+
+  btn.disabled = true;
+  btn.textContent = '⏳ Scanning...';
+  loader.style.display = 'flex';
+  output.style.display = 'none';
+  output.textContent = '';
+
+  setTimeout(() => {
+    loader.style.display = 'none';
+    output.style.display = 'block';
+    output.textContent = VAULT.audit.log(url);
+    btn.disabled = false;
+    btn.textContent = '🚀 Scan Website Free';
+    showToast('Audit complete — score: 96/100 ✅', 'success');
+  }, 1600);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   SYSTEM ACTION 2 — KEYWORD & TITLE ENGINE
+───────────────────────────────────────────────────────────────── */
+function runKeywordEngine() {
+  const input  = document.getElementById('kw-input').value.toLowerCase().trim();
+  const btn    = document.getElementById('kw-run-btn');
+  const loader = document.getElementById('kw-loader');
+  const output = document.getElementById('kw-output');
+
+  if (!input) { alert('Enter a seed market topic to begin.'); return; }
+
+  btn.disabled = true;
+  loader.style.display = 'flex';
+  output.style.display = 'none';
+  output.innerHTML = '';
+
+  setTimeout(() => {
+    loader.style.display = 'none';
+
+    const matchKey = Object.keys(VAULT.semantics).find(k => input.includes(k)) || 'default';
+    const data = VAULT.semantics[matchKey];
+
+    let html = `<h4 style="margin-bottom:16px;font-size:16px;color:var(--text);">Semantic Extraction Complete: "${input}"</h4>`;
+
+    html += `<div style="margin-bottom:20px;"><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:12px;">High-Value Semantic Terms</div>`;
+    data.phrases.forEach(p => {
+      html += `<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:8px;font-size:14px;color:var(--text-soft);">
+        <span style="color:var(--accent-2);font-size:16px;">→</span> ${p}
+      </div>`;
+    });
+    html += `</div>`;
+
+    html += `<div><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:12px;">Conversion-Optimized Blueprint Titles</div>`;
+    data.titles.forEach(item => {
+      html += `<div class="result-card">
+        <div><span class="result-pill">${item.cat}</span><p style="margin:0;font-size:14px;font-weight:500;color:var(--text);">${item.t}</p></div>
+      </div>`;
+    });
+    html += `</div>`;
+
+    output.innerHTML = html;
+    output.style.display = 'block';
+    btn.disabled = false;
+    showToast(`${data.phrases.length + data.titles.length} outputs generated ✅`, 'success');
+  }, 1100);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   SYSTEM ACTION 3 — ARTICLE STREAMING ENGINE
+───────────────────────────────────────────────────────────────── */
+function runArticleStream() {
+  const topic  = document.getElementById('article-input').value.trim();
+  const btn    = document.getElementById('article-run-btn');
+  const loader = document.getElementById('article-loader');
+  const output = document.getElementById('article-output');
+
+  if (!topic) { alert('Provide a target article topic or keyphrase.'); return; }
+
+  btn.disabled = true;
+  loader.style.display = 'flex';
+  output.style.display = 'none';
+  output.textContent = '';
+
+  setTimeout(() => {
+    loader.style.display = 'none';
+    output.style.display = 'block';
+
+    const header = `[INITIALIZING LOCAL STREAMING INJECTION: "${topic}"]\n${'─'.repeat(52)}\n\n`;
+    const src    = VAULT.article.intro;
+    let   full   = header;
+    let   idx    = 0;
+
+    output.textContent = full;
+
+    const stream = setInterval(() => {
+      if (idx >= src.length) {
+        clearInterval(stream);
+        btn.disabled = false;
+        showToast('Article blueprint streamed successfully ✅', 'success');
+        return;
+      }
+      const chunk = src.slice(idx, idx + 3);
+      full += chunk;
+      output.textContent = full;
+      output.scrollTop = output.scrollHeight;
+      idx += 3;
+    }, 10);
+  }, 1400);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   SYSTEM ACTION 4 — DOCS AUTO-SUGGEST
+───────────────────────────────────────────────────────────────── */
+function runDocsSearch() {
+  const entry  = document.getElementById('docs-input').value.toLowerCase().trim();
+  const popup  = document.getElementById('docs-popup');
+  const output = document.getElementById('docs-output');
+
+  popup.innerHTML = '';
+
+  if (!entry) {
+    popup.style.display = 'none';
+    output.style.display = 'none';
+    return;
+  }
+
+  const matched = VAULT.docs.filter(d =>
+    d.name.toLowerCase().includes(entry) ||
+    d.tags.some(t => t.includes(entry))
+  );
+
+  if (matched.length > 0) {
+    popup.style.display = 'block';
+    matched.forEach(doc => {
+      const row = document.createElement('div');
+      row.className = 'suggest-row';
+      row.textContent = doc.name;
+      row.onclick = () => {
+        popup.style.display = 'none';
+        document.getElementById('docs-input').value = doc.name;
+        output.style.display = 'block';
+        output.textContent = `[AMK ENHANCED DOCUMENTATION RETRIEVAL]
+${'─'.repeat(52)}
+Resource    : ${doc.name}
+Index Tags  : ${doc.tags.join(', ')}
+Last Updated: ${new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'})}
+
+[SYSTEM NOTIFICATION]
+Fully detailed framework documentation pages — including complete code examples, implementation walkthroughs, API reference tables, and benchmark datasets — are bundled directly inside the main AntiGravity operational environment.
+
+Request credentials from an AMK system administrator for complete internal library access or book a strategy call to review key documentation sections with our senior technical team.
+
+Access Level Required : Pro / Ultra
+Estimated Read Time   : 24–47 minutes
+Classification        : Internal Architecture Reference`;
+        showToast('Documentation retrieved ✅', 'success');
+      };
+      popup.appendChild(row);
+    });
+  } else {
+    popup.style.display = 'none';
+  }
+}
+
+/* Close popup on outside click */
+document.addEventListener('click', (e) => {
+  const popup = document.getElementById('docs-popup');
+  const wrap  = document.querySelector('.suggest-wrap');
+  if (wrap && !wrap.contains(e.target)) popup.style.display = 'none';
+});
+
+/* ─────────────────────────────────────────────────────────────────
+   CONTACT FORM
+───────────────────────────────────────────────────────────────── */
+function submitForm(e) {
+  e.preventDefault();
+  document.getElementById('contact-form').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+  showToast('Strategy session requested! 🚀', 'success');
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   TOAST NOTIFICATIONS
+───────────────────────────────────────────────────────────────── */
+function showToast(msg, type = 'info') {
+  const container = document.getElementById('toast-container');
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  t.innerHTML = `<span>${type === 'success' ? '✅' : 'ℹ️'}</span><span>${msg}</span>`;
+  container.appendChild(t);
+  setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity 0.4s'; setTimeout(() => t.remove(), 400); }, 3500);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   SCROLL REVEAL (IntersectionObserver)
+───────────────────────────────────────────────────────────────── */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); revealObserver.unobserve(e.target); } });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
+
+/* ─────────────────────────────────────────────────────────────────
+   ANIMATED STAT COUNTERS
+───────────────────────────────────────────────────────────────── */
+function animateCount(el, target, suffix) {
+  let start = 0;
+  const step = Math.ceil(target / 60);
+  const interval = setInterval(() => {
+    start = Math.min(start + step, target);
+    el.textContent = start + suffix;
+    if (start >= target) clearInterval(interval);
+  }, 25);
+}
+const statObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animateCount(document.getElementById('stat-audits'), 340, '+');
+      animateCount(document.getElementById('stat-lift'),   47,  '%');
+      statObs.disconnect();
+    }
+  });
+}, { threshold: 0.5 });
+const heroStats = document.querySelector('.hero-stats');
+if (heroStats) statObs.observe(heroStats);
+
+/* ─────────────────────────────────────────────────────────────────
+   SCORE RING ANIMATION
+───────────────────────────────────────────────────────────────── */
+setTimeout(() => {
+  const arc = document.getElementById('score-arc');
+  if (arc) {
+    const pct = 90 / 100;
+    const circumference = 2 * Math.PI * 37; // 232.5
+    arc.style.strokeDashoffset = circumference * (1 - pct);
+    arc.style.transition = 'stroke-dashoffset 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
+  }
+}, 800);
+
+/* ─────────────────────────────────────────────────────────────────
+   MOBILE NAVIGATION
+───────────────────────────────────────────────────────────────── */
+function toggleNav() {
+  document.getElementById('main-nav').classList.toggle('open');
+}
+/* Close nav on link click */
+document.querySelectorAll('#main-nav a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('main-nav').classList.remove('open'));
+});
+
+/* ─────────────────────────────────────────────────────────────────
+   SECURITY ENVELOPE — ANTI-INSPECTION LAYER
+───────────────────────────────────────────────────────────────── */
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+  // F12
+  if (e.keyCode === 123) { e.preventDefault(); return false; }
+  // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+  if (e.ctrlKey && e.shiftKey && [73, 74, 67].includes(e.keyCode)) { e.preventDefault(); return false; }
+  // Ctrl+U (View Source)
+  if (e.ctrlKey && e.keyCode === 85) { e.preventDefault(); return false; }
+  // Ctrl+S (Save)
+  if (e.ctrlKey && e.keyCode === 83) { e.preventDefault(); return false; }
+});
+
+/* Detect DevTools open (continuous loop guard) */
+(function devToolsGuard() {
+  const threshold = 160;
+  const check = () => {
+    const widthDiff  = window.outerWidth  - window.innerWidth  > threshold;
+    const heightDiff = window.outerHeight - window.innerHeight > threshold;
+    if (widthDiff || heightDiff) {
+      document.body.style.filter = 'blur(12px)';
+    } else {
+      document.body.style.filter = '';
+    }
+  };
+  setInterval(check, 1000);
+})();
+
+</script>
+</body>
+</html>
