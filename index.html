@@ -56,6 +56,39 @@
       --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
       --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
       --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+      /* select dropdown specific */
+      --select-bg:   #141420;
+      --select-text: #F8FAFC;
+    }
+
+    /* ─── LIGHT THEME TOKENS ─────────────────────────────────────── */
+    [data-theme="light"] {
+      --bg:              #F8F9FC;
+      --bg-alt:          #EEF0F8;
+      --bg-card:         #FFFFFF;
+      --surface:         rgba(255, 255, 255, 0.80);
+      --surface-strong:  rgba(255, 255, 255, 0.98);
+      --accent:          #6366F1;
+      --accent-light:    rgba(99, 102, 241, 0.12);
+      --accent-glow:     rgba(99, 102, 241, 0.25);
+      --accent-2:        #0D9488;
+      --accent-2-light:  rgba(13, 148, 136, 0.10);
+      --accent-warn:     #D97706;
+      --accent-error:    #DC2626;
+      --accent-success:  #059669;
+      --text:            #0F172A;
+      --text-soft:       #475569;
+      --text-muted:      #94A3B8;
+      --text-faint:      #CBD5E1;
+      --border:          rgba(0, 0, 0, 0.08);
+      --border-strong:   rgba(0, 0, 0, 0.15);
+      --border-accent:   rgba(99, 102, 241, 0.30);
+      --shadow-sm:   0 2px 8px rgba(0, 0, 0, 0.07);
+      --shadow-md:   0 8px 32px rgba(0, 0, 0, 0.10);
+      --shadow-lg:   0 20px 60px rgba(0, 0, 0, 0.13);
+      --shadow-xl:   0 32px 80px rgba(0, 0, 0, 0.16);
+      --select-bg:   #FFFFFF;
+      --select-text: #0F172A;
     }
 
     /* ─── RESET ─────────────────────────────────────────────────── */
@@ -218,6 +251,7 @@
       border-bottom: 1px solid var(--border);
       transition: background var(--t-base);
     }
+    [data-theme="light"] #site-header { background: rgba(248,249,252,0.85); }
     #site-header .container {
       display: flex;
       align-items: center;
@@ -256,15 +290,34 @@
       color: var(--text-soft);
       transition: background var(--t-base), color var(--t-base);
     }
-    nav a:hover { background: rgba(255,255,255,0.06); color: var(--text); }
+    nav a:hover { background: rgba(128,128,128,0.10); color: var(--text); }
 
     .header-cta { display:flex; align-items:center; gap:12px; }
+
+    /* ─── THEME TOGGLE ───────────────────────────────────────────── */
+    #theme-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-full);
+      border: 1.5px solid var(--border-strong);
+      background: var(--surface);
+      color: var(--text-soft);
+      cursor: pointer;
+      transition: all var(--t-base);
+      flex-shrink: 0;
+      font-size: 17px;
+      line-height: 1;
+    }
+    #theme-toggle:hover { border-color: var(--accent); color: var(--accent); transform: rotate(20deg); }
 
     /* Mobile nav */
     #nav-toggle { display:none; }
     @media (max-width: 768px) {
       nav { display:none; }
-      nav.open { display:flex; flex-direction:column; position:fixed; top:68px; left:0; right:0; background:rgba(0,0,0,0.97); backdrop-filter:var(--blur); padding:20px 24px; border-bottom:1px solid var(--border); z-index:199; gap:4px; }
+      nav.open { display:flex; flex-direction:column; position:fixed; top:68px; left:0; right:0; background: var(--bg); backdrop-filter:var(--blur); padding:20px 24px; border-bottom:1px solid var(--border); z-index:199; gap:4px; }
       nav.open a { padding:14px 16px; border-radius:var(--radius-md); }
       #nav-toggle { display:flex; align-items:center; justify-content:center; padding:8px; border-radius:var(--radius-sm); border:1px solid var(--border); color:var(--text-soft); }
     }
@@ -860,7 +913,32 @@
       color: var(--text);
       font-size: 14px;
       outline: none;
-      transition: border-color var(--t-base), box-shadow var(--t-base);
+      transition: border-color var(--t-base), box-shadow var(--t-base), background var(--t-base), color var(--t-base);
+      font-family: var(--font-body);
+    }
+    [data-theme="light"] .form-input { background: #fff; }
+    /* Fix select dropdown — browser native popup uses OS colors so we control the element itself */
+    select.form-input, select.lab-select {
+      background-color: var(--select-bg);
+      color: var(--select-text);
+      -webkit-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23818CF8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 38px;
+      cursor: pointer;
+    }
+    [data-theme="light"] select.form-input,
+    [data-theme="light"] select.lab-select {
+      background-color: #fff;
+      color: #0F172A;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236366F1' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    }
+    /* Force option text colors so they're always readable in the popup */
+    select.form-input option, select.lab-select option {
+      background-color: var(--select-bg);
+      color: var(--select-text);
     }
     .form-input:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-light); }
     .form-input::placeholder { color:var(--text-faint); }
@@ -979,6 +1057,7 @@
     </nav>
 
     <div class="header-cta">
+      <button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode" title="Toggle theme">🌙</button>
       <a href="#contact" class="btn btn-primary btn-sm">Book Strategy Call</a>
       <button id="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -1939,6 +2018,26 @@ setTimeout(() => {
     arc.style.transition = 'stroke-dashoffset 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
   }
 }, 800);
+
+/* ─────────────────────────────────────────────────────────────────
+   THEME TOGGLE — DARK / LIGHT
+───────────────────────────────────────────────────────────────── */
+(function () {
+  var saved = localStorage.getItem('amk-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  var btn = document.getElementById('theme-toggle');
+  if (btn) btn.textContent = saved === 'dark' ? '\uD83C\uDF19' : '\u2600\uFE0F';
+})();
+
+function toggleTheme() {
+  var root = document.documentElement;
+  var current = root.getAttribute('data-theme');
+  var next = current === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('amk-theme', next);
+  var btn = document.getElementById('theme-toggle');
+  if (btn) btn.textContent = next === 'dark' ? '\uD83C\uDF19' : '\u2600\uFE0F';
+}
 
 /* ─────────────────────────────────────────────────────────────────
    MOBILE NAVIGATION
