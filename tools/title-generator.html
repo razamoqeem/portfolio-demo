@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Title Generator for SEO | AMK Digital Agency</title>
+  <meta name="description" content="Free title generator: enter a keyword and get ready-made title patterns for blog posts and landing pages, with a character count for each. Runs in your browser." />
+  <script src="../js/theme-engine.js"></script>
+  <link rel="icon" href="../assets/logo.png" />
+  <link rel="stylesheet" href="../tools/overview.css" />
+  <script src="../js/config.js"></script>
+  <script src="../js/title-generator.js" defer></script>
+  <link rel="stylesheet" href="../demo.css" />
+  <script src="../js/demo-samples.js"></script>
+  <script src="../script.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="top">
+    <a class="brand" href="../index.html"><img src="../assets/logo.png" alt="" width="28" height="28" /> AMK Digital Agency</a>
+    <nav aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../tools/index.html">Free Tools &amp; AI Tools</a>
+      <a href="../docs/index.html">Docs</a>
+      <a href="../docs/how-to-use-the-free-tools/index.html">How to use</a>
+      <button type="button" class="theme-toggle-btn" aria-label="Toggle light or dark theme">🌙 Theme</button>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero">
+      <h1>Title Generator</h1>
+      <p>Enter a focus keyword to generate high-converting title variations for articles, case studies, and landing pages with live character counts. Runs locally in your browser with zero limits.</p>
+      <div style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom: 24px;">
+        <span class="tag LOW">✦ Free to Use</span>
+        <span class="tag">🎯 Character Counts</span>
+        <span class="tag good">🔄 Unlimited Browser Tool</span>
+      </div>
+
+      <div class="panel" style="max-width: 680px; margin: 0 auto; text-align: left; padding: 24px;">
+        <div style="margin-bottom: 16px;">
+          <label for="focusKeyword" style="display:block; font-size:var(--fs-sm); font-weight:600; margin-bottom:6px; color:var(--text);">Focus Keyword</label>
+          <input type="text" id="focusKeyword" class="tool-input" style="width:100%;" placeholder="e.g. cloud automation suite, AI marketing tools" />
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px; margin-bottom:16px;">
+          <div>
+            <label for="contentType" style="display:block; font-size:var(--fs-sm); font-weight:600; margin-bottom:6px; color:var(--text);">Content Intent Profile</label>
+            <select id="contentType" class="tool-input" style="width:100%;">
+              <option value="blog post">In-Depth Blog Blueprint</option>
+              <option value="case study">Data-Driven Case Study</option>
+              <option value="landing page">High-Conversion Landing Page</option>
+            </select>
+          </div>
+          <div>
+            <label for="tone" style="display:block; font-size:var(--fs-sm); font-weight:600; margin-bottom:6px; color:var(--text);">Tone Alignment</label>
+            <select id="tone" class="tool-input" style="width:100%;">
+              <option value="authoritative">Authoritative &amp; Strategic</option>
+              <option value="educational">Data-Backed Educational</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Optional Parameters -->
+        <details style="margin-bottom: 20px;">
+          <summary style="cursor:pointer; font-size:var(--fs-sm); font-weight:600; color:var(--accent);">Optional Creative Parameters (Audience &amp; Secondary Keywords)</summary>
+          <div style="margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);">
+            <div style="margin-bottom: 14px;">
+              <label for="secondaryKeywords" style="display:block; font-size:var(--fs-sm); font-weight:600; margin-bottom:6px; color:var(--text);">Secondary Keywords (comma separated)</label>
+              <input type="text" id="secondaryKeywords" class="tool-input" style="width:100%;" placeholder="e.g. best tools, pricing, review" />
+            </div>
+            <div>
+              <label for="audience" style="display:block; font-size:var(--fs-sm); font-weight:600; margin-bottom:6px; color:var(--text);">Target Audience</label>
+              <input type="text" id="audience" class="tool-input" style="width:100%;" placeholder="e.g. enterprise managers, solo founders" />
+            </div>
+          </div>
+        </details>
+
+        <button type="button" class="btn" id="generate-btn" style="width:100%;" onclick="runTitleGenerator()">
+          ✦ Generate Title Variations
+        </button>
+      </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="title-results-container" style="max-width: 680px; margin: 32px auto 0; display:none;">
+      <h2>Generated Title Patterns</h2>
+      <p class="meta">Target search snippet length is 50–60 characters. Titles exceeding 60 characters are flagged in amber.</p>
+      <div id="title-results"></div>
+    </section>
+  </main>
+
+  <footer class="foot">&copy; 2026 AMK Digital Agency &middot; <span>Beta / Preview</span></footer>
+
+  <script>
+    function runTitleGenerator() {
+      var kw = document.getElementById('focusKeyword').value.trim();
+      var container = document.getElementById('title-results-container');
+      var resultsDiv = document.getElementById('title-results');
+      if (!kw) {
+        alert('Please enter a focus keyword first.');
+        return;
+      }
+      container.style.display = 'block';
+      var secondaryVal = document.getElementById('secondaryKeywords').value.trim();
+      var results = window.AMKTitleGenerator.generateTitles({
+        keyword: kw,
+        audience: document.getElementById('audience').value,
+        contentType: document.getElementById('contentType').value,
+        secondary: secondaryVal ? secondaryVal.split(',').map(function (s) { return s.trim(); }).filter(Boolean) : []
+      });
+      window.AMKTitleGenerator.renderTitles(resultsDiv, results);
+      container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  </script>
+</body>
+</html>

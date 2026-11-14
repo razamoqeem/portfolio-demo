@@ -1,0 +1,170 @@
+@import url("../css/theme.css");
+@import url("../css/spacing.css");
+
+/* AMK Digital Agency Website — styles for pages built by the CMS.
+   Colours, fonts and sizes come from /css/theme.css.
+   Widths, gutters and gaps come from /css/spacing.css.
+   The names below are the short names these pages already use. */
+
+:root {
+  --c-page: var(--theme-page);
+  --c-surface: var(--theme-surface);
+  --c-surface-subtle: var(--theme-surface-subtle);
+  --c-ink: var(--theme-text);
+  --c-muted: var(--theme-text-muted);
+  --c-faint: var(--theme-text-faint);
+  --c-line: var(--theme-border);
+  --c-accent: var(--theme-brand);
+  --c-accent-strong: var(--theme-brand-strong);
+  --c-success: var(--theme-success);
+  /* names used by the CMS colour picker (content/settings.json) */
+  --c-background: var(--theme-page);
+
+  --font-sans: var(--theme-font-body);
+  --font-mono: var(--theme-font-mono);
+  --letter-spacing-heading: var(--theme-tracking-heading);
+  --letter-spacing-body: var(--theme-tracking-body);
+  --letter-spacing-badge: var(--theme-tracking-badge);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  letter-spacing: var(--letter-spacing-body);
+  line-height: 1.6;
+  color: var(--c-ink);
+  background: var(--c-page);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* ── Layout (widths and gutters from spacing.css) ── */
+.wrap { width: 100%; max-width: var(--container-text); margin: 0 auto; padding-inline: var(--gutter); }
+/* Header and footer use the wider container, so the logo sits in the same
+   place as on the tool pages. Reading text stays in the narrower column. */
+.site-header .wrap, .site-footer .wrap { max-width: var(--container); }
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  padding: 8px 12px; background: var(--c-surface); color: var(--c-ink);
+}
+.skip-link:focus { left: 8px; top: 8px; z-index: 10; }
+
+a { color: var(--c-accent-strong); transition: color 0.15s ease; }
+a:hover { color: var(--c-accent); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--c-accent); outline-offset: 2px; }
+
+.site-header { background: var(--c-surface); border-bottom: 1px solid var(--c-line); }
+.header-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-sm) var(--space-lg); padding-block: 14px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; color: var(--c-ink); text-decoration: none; letter-spacing: var(--letter-spacing-heading); }
+.brand img { border-radius: 6px; }
+.nav-list { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-xs) 18px; margin: 0; padding: 0; list-style: none; }
+.nav-list li { margin: 0; }
+.nav-list a { display: inline-block; padding: 6px 0; color: var(--c-ink); text-decoration: none; font-size: 0.9375rem; font-weight: 500; }
+.nav-list a:hover { color: var(--c-accent); text-decoration: none; }
+
+/* Universal Theme Toggle Button */
+.theme-toggle-btn {
+  background: var(--c-surface-subtle);
+  border: 1px solid var(--c-line);
+  color: var(--c-ink);
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: inherit;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.theme-toggle-btn:hover { border-color: var(--c-accent); }
+.theme-toggle-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+.page-body { padding-block: clamp(28px, 4vw, 48px) clamp(40px, 6vw, 72px); }
+.page-body > * { margin: 0 0 var(--stack-gap); }
+/* Headings sit closer to the text they introduce than to the text above. */
+.page-body > :is(h2, h3, h4) { margin: clamp(28px, 4vw, 40px) 0 10px; }
+.page-body > :first-child { margin-top: 0; }
+.page-body > :last-child { margin-bottom: 0; }
+h1, h2, h3, h4 {
+  line-height: 1.25;
+  margin: 36px 0 14px;
+  letter-spacing: var(--letter-spacing-heading);
+  color: var(--c-ink);
+}
+h1 { font-size: clamp(1.85rem, 1.5rem + 1.5vw, 2.65rem); font-weight: 800; }
+h2 { font-size: clamp(1.4rem, 1.25rem + 0.8vw, 1.85rem); font-weight: 700; }
+h3 { font-size: clamp(1.15rem, 1.05rem + 0.4vw, 1.35rem); font-weight: 600; }
+
+ul, ol { padding-left: 1.35rem; margin: 12px 0; }
+ul { list-style-type: disc; }
+ol { list-style-type: decimal; }
+li { margin: 6px 0; overflow-wrap: anywhere; letter-spacing: var(--letter-spacing-body); }
+li::marker { color: var(--c-accent); }
+img { max-width: 100%; height: auto; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--theme-on-brand);
+  background: var(--c-accent);
+  transition: background 0.15s ease;
+}
+.btn:hover { background: var(--c-accent-strong); color: var(--theme-on-brand); }
+
+.faq { border: 1px solid var(--c-line); border-radius: var(--theme-radius-sm); background: var(--c-surface); padding: 14px 18px; margin-bottom: 12px; }
+.faq summary { cursor: pointer; font-weight: 600; color: var(--c-ink); }
+
+.site-footer { border-top: 1px solid var(--c-line); background: var(--c-surface); }
+.footer-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-sm) var(--space-lg); padding-block: var(--space-lg); font-size: 0.875rem; color: var(--c-muted); }
+.preview-label { font-weight: 600; }
+
+/* Size tokens */
+.t-size-sm { font-size: 0.875rem; }
+.t-size-md { font-size: 1rem; }
+.t-size-lg { font-size: 1.25rem; }
+.t-size-xl { font-size: clamp(1.85rem, 1.5rem + 1.5vw, 2.5rem); font-weight: 800; }
+
+/* Opacity tokens */
+.t-op-100 { opacity: 1; }
+.t-op-80 { opacity: 0.8; }
+.t-op-60 { opacity: 0.6; }
+.t-op-40 { opacity: 0.4; }
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--c-surface-subtle);
+  color: var(--c-ink);
+  border: 1px solid var(--c-line);
+  padding: 2px 6px;
+  border-radius: 5px;
+  overflow-wrap: anywhere;
+}
+
+/* Colour picker classes for the names in content/settings.json */
+.t-color-ink { color: var(--c-ink); }
+.t-bg-ink { background: var(--c-ink); }
+.t-color-muted { color: var(--c-muted); }
+.t-bg-muted { background: var(--c-muted); }
+.t-color-accent { color: var(--c-accent); }
+.t-bg-accent { background: var(--c-accent); }
+.t-color-accent-strong { color: var(--c-accent-strong); }
+.t-bg-accent-strong { background: var(--c-accent-strong); }
+.t-color-success { color: var(--c-success); }
+.t-bg-success { background: var(--c-success); }
+.t-color-surface { color: var(--c-surface); }
+.t-bg-surface { background: var(--c-surface); }
+.t-color-background { color: var(--c-background); }
+.t-bg-background { background: var(--c-background); }

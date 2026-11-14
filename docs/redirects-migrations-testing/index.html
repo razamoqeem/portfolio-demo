@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Redirects, Migrations, and A/B Testing | AMK Digital Agency</title>
+  <meta name="description" content="Permanent (301/308): Signal to Google that the target is the new canonical. Temporary (302/303/307): Signal that the source should remain the…" />
+  <script src="../../js/theme-engine.js"></script>
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Redirects, Migrations, and A/B Testing | AMK Digital Agency" />
+  <meta property="og:description" content="Permanent (301/308): Signal to Google that the target is the new canonical. Temporary (302/303/307): Signal that the source should remain the…" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="../../assets/logo.png" />
+  <link rel="stylesheet" href="../../assets/site.css" />
+  <link rel="stylesheet" href="../../demo.css" />
+  <script src="../../js/demo-samples.js"></script>
+  <script src="../../script.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a class="brand" href="../../index.html"><img src="../../assets/logo.png" alt="" width="28" height="28" /> AMK Digital Agency</a>
+      <nav aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../../tools/index.html">Free Tools &amp; AI Tools</a></li>
+          <li><a href="../../docs/index.html">Docs</a></li>
+          <li><a href="../../company/index.html">Company</a></li>
+          <li><a href="../../owner/index.html">Founder</a></li>
+          <li><button type="button" class="theme-toggle-btn" aria-label="Toggle light or dark theme">🌙 Theme</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="wrap page-body">
+    <h1 class="t-size-xl t-color-ink t-op-100">Redirects, Migrations, and A/B Testing</h1>
+    <h2 class="t-size-lg t-color-ink t-op-100">1. Redirect Types</h2>
+    <ul class="t-size-md t-color-ink t-op-100"><li><strong>Permanent (301/308)</strong>: Signal to Google that the target is the new canonical.</li><li><strong>Temporary (302/303/307)</strong>: Signal that the source should remain the canonical.</li><li><strong>Meta Refresh</strong>: Instant (0s) is treated as Permanent; Delayed (&gt;0s) is treated as Temporary.</li><li><strong>JS Redirects</strong>: Interpreted by Web Rendering Service (WRS), but risky if rendering fails.</li><li><strong>Crypto Redirects</strong>: Adding a link ("We've moved!") as a fallback.</li></ul>
+    <h2 class="t-size-lg t-color-ink t-op-100">2. Site Moves &amp; Migrations</h2>
+    <ul class="t-size-md t-color-ink t-op-100"><li><strong>Visible URL Changes</strong>: Require 301 redirects for every page.</li><li><strong>No URL Change (Hosting Change)</strong>: Monitor TTL values, update DNS, and verify Googlebot access via URL Inspection Tool.</li><li><strong>Crawl Rate</strong>: Expect a temporary drop in crawl rate during moves, followed by an increase.</li><li><strong>Soft 404 Prevention</strong>: Don't redirect all old URLs to the homepage; redirect to the most relevant equivalent page.</li></ul>
+    <h2 class="t-size-lg t-color-ink t-op-100">3. A/B Testing Best Practices</h2>
+    <ul class="t-size-md t-color-ink t-op-100"><li><strong>No Cloaking</strong>: Show the same variations to Googlebot as to users (or show the default).</li><li><strong>rel="canonical"</strong>: Use on all variants pointing back to the original URL.</li><li><strong>302 Redirects</strong>: Use temporary redirects for experiments.</li><li><strong>Duration</strong>: Run experiments only as long as necessary.</li></ul>
+    <h2 class="t-size-lg t-color-ink t-op-100">4. Redirect Chains</h2>
+    <ul class="t-size-md t-color-ink t-op-100"><li>Googlebot follows up to 10 hops.</li><li>Recommended limit: &lt; 3 hops for performance and reliability.</li></ul>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <span>&copy; 2026 AMK Digital Agency</span>
+      <span></span>
+      <span class="preview-label">Beta / Preview</span>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Keyword Generator — AI Keyword Research Tool | AMK Digital Agency</title>
+  <meta name="description" content="Keyword generator from AMK Digital Agency. This tool is being rebuilt and is temporarily unavailable." />
+  <link rel="stylesheet" href="../css/base.css?v=2026.11.14" />
+  <link rel="stylesheet" href="../tools/tools.css?v=2026.11.14" />
+  <script src="../js/theme-engine.js?v=2026.06.14"></script>
+  <link rel="stylesheet" href="../demo.css" />
+  <script src="../js/demo-samples.js"></script>
+  <script src="../script.js"></script>
+</head>
+<body>
+  <div class="tool-page">
+
+    <!-- ═══ HEADER ═══ -->
+    <header class="tool-header">
+      <div class="container">
+        <a href="../index.html" class="tool-header-brand">
+          <img src="../assets/logo.png" alt="AMK" />
+          <span>AMK <span class="sub">Digital Agency</span></span>
+        </a>
+        <nav class="tool-header-nav">
+          <a href="../tools/free-tools.html#seo-audit">SEO Audit</a>
+          <a href="../tools/title-generator.html">Title Generator</a>
+          <a href="../tools/keyword-generator.html" class="active-tool">Keywords</a>
+          <a href="../tools/article-writer.html">Article Writer</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="tool-hero">
+      <div class="container">
+        <div class="tool-hero-icon">🔑</div>
+        <h1>AI Keyword Generator</h1>
+        <p>Discover semantic keyword opportunities for any niche — with search volume estimates, difficulty scores, and search intent classification.</p>
+        <div class="tool-hero-badges">
+          <span class="tool-badge accent">✦ Free to Use</span>
+          <span class="tool-badge">📊 Volume & Difficulty</span>
+          <span class="tool-badge">🎯 Intent Mapping</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ WORKSPACE ═══ -->
+    <main class="tool-workspace">
+      <div class="container">
+
+        <div class="tool-form-card">
+          <div class="tool-form-group">
+            <label class="tool-form-label">Target Niche / Industry</label>
+            <input type="text" id="keywordNiche" class="tool-form-input" placeholder="e.g. artificial intelligence in healthcare, SaaS marketing" />
+          </div>
+
+          <div class="tool-form-row" style="margin-bottom:20px;">
+            <div class="tool-form-group" style="margin-bottom:0;">
+              <label class="tool-form-label">Target Audience</label>
+              <input type="text" id="keywordAudience" class="tool-form-input" placeholder="e.g. medical administrators, startup founders" />
+            </div>
+            <div class="tool-form-group" style="margin-bottom:0;">
+              <label class="tool-form-label">Tone Alignment</label>
+              <select id="keywordTone" class="tool-form-select">
+                <option value="authoritative">Authoritative & Strategic</option>
+                <option value="creative">Creative & Disruptive</option>
+                <option value="educational">Data-Backed Educational</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="tool-cta-btn" id="generate-btn" onclick="generateKeywords()">
+            🔑 Generate Semantic Keywords
+          </button>
+        </div>
+
+        <!-- Results -->
+        <div id="keyword-results" style="display:none;"></div>
+
+      </div>
+    </main>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="tool-footer">
+      <div class="container">
+        <div class="tool-footer-links">
+          <a href="../index.html">← Back to Home</a>
+          <a href="../tools/free-tools.html#seo-audit">SEO Audit</a>
+          <a href="../tools/title-generator.html">Title Generator</a>
+          <a href="../tools/article-writer.html">Article Writer</a>
+        </div>
+        <div class="tool-footer-copy">© 2026 AMK Digital Agency. All rights reserved.</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const API_BASE = `${window.location.protocol}//${window.location.host}`;
+    const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+
+    async function generateKeywords() {
+      const niche = document.getElementById('keywordNiche').value.trim();
+      if (!niche) return alert('Niche or industry description is required.');
+
+      const btn = document.getElementById('generate-btn');
+      const resultsDiv = document.getElementById('keyword-results');
+      btn.disabled = true;
+      btn.innerHTML = '<div class="tool-spinner" style="width:20px;height:20px;border-width:2px;"></div> Analyzing...';
+
+      resultsDiv.style.display = 'block';
+      resultsDiv.innerHTML = `
+        <div class="tool-loading">
+          <div class="tool-spinner"></div>
+          <div class="tool-loading-text">Analyzing search volume index data and semantic clusters...</div>
+        </div>`;
+
+      try {
+        const res = await fetch(`${API_BASE}/api/generate-keywords`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            niche,
+            audience: document.getElementById('keywordAudience').value.trim(),
+            tone: document.getElementById('keywordTone').value
+          })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || 'Generation failed');
+        renderKeywords(data);
+      } catch (err) {
+        resultsDiv.innerHTML = `
+          <div class="tool-results-card" style="text-align:center; padding:40px;">
+            <div style="font-size:36px; margin-bottom:12px;">⚠️</div>
+            <p style="color:var(--accent-error); font-weight:600;">Generation failed: ${esc(err.message)}</p>
+            <p style="color:var(--text-muted); font-size:13px; margin-top:8px;">Please check your inputs and try again.</p>
+          </div>`;
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '🔑 Generate Semantic Keywords';
+      }
+    }
+
+    function renderKeywords(data) {
+      const resultsDiv = document.getElementById('keyword-results');
+      const items = Array.isArray(data) ? data : [];
+
+      const diffClass = d => d === 'High' ? 'tool-kw-diff-high' : (d === 'Medium' ? 'tool-kw-diff-med' : 'tool-kw-diff-low');
+
+      const rows = items.map(item => `
+        <tr>
+          <td class="kw-name">${esc(item.keyword)}</td>
+          <td style="color:var(--text-soft);">${esc(item.search_volume)}</td>
+          <td><span class="${diffClass(item.difficulty)}">${esc(item.difficulty)}</span></td>
+          <td><span class="tool-kw-intent">${esc(item.intent)}</span></td>
+        </tr>
+      `).join('');
+
+      resultsDiv.innerHTML = `
+        <div class="tool-results">
+          <div class="tool-results-card">
+            <div class="tool-results-header">
+              <h3>🔑 Semantic Keyword Opportunities</h3>
+              <span style="font-size:12px; color:var(--text-muted);">${items.length} keywords discovered</span>
+            </div>
+
+            <div style="overflow-x:auto;">
+              <table class="tool-kw-table">
+                <thead>
+                  <tr>
+                    <th>Keyword</th>
+                    <th>Search Volume</th>
+                    <th>Difficulty</th>
+                    <th>Intent</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${rows || '<tr><td colspan="4" style="text-align:center; color:var(--text-muted); padding:20px;">No keywords generated.</td></tr>'}
+                </tbody>
+              </table>
+            </div>
+
+            <div class="tool-regenerate-bar">
+              <button class="tool-regenerate-btn" onclick="generateKeywords()">
+                🔄 Generate More Keywords
+              </button>
+              <button class="tool-copy-btn" onclick="copyTable()">📋 Copy All</button>
+              <span style="font-size:12px; color:var(--text-faint);">Adjust niche or audience above for different results</span>
+            </div>
+          </div>
+
+          <div class="tool-upsell-banner">
+            <div class="upsell-text">
+              <h4>📈 Want Real-Time Search Data?</h4>
+              <p>Upgrade to a paid plan for live search volume, competition metrics, SERP analysis, and keyword tracking.</p>
+            </div>
+            <a href="../index.html#pricing" class="tool-upsell-btn">View Plans →</a>
+          </div>
+        </div>`;
+
+      // Store for copy
+      window._lastKeywords = items;
+    }
+
+    function copyTable() {
+      if (!window._lastKeywords) return;
+      const text = window._lastKeywords.map(k =>
+        `${k.keyword}\t${k.search_volume}\t${k.difficulty}\t${k.intent}`
+      ).join('\n');
+      navigator.clipboard.writeText('Keyword\tSearch Volume\tDifficulty\tIntent\n' + text).then(() => {
+        alert('Keywords copied to clipboard!');
+      });
+    }
+  </script>
+  <script src="../js/config.js"></script>
+  <script src="../js/title-generator.js"></script>
+  
+</body>
+</html>

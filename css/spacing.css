@@ -1,0 +1,40 @@
+/* ============================================================
+   AMK Digital Agency — SPACING.CSS  (layout only, no colours)
+
+   Page widths, side gutters, gaps and vertical rhythm.
+   A new colour palette never needs to touch this file.
+   Colours, fonts and text sizes are in theme.css.
+
+   Measured widths: phone 375px, tablet 768px, desktop 1280px.
+   The App keeps an identical copy in app/css/spacing.css.
+   ============================================================ */
+:root {
+  /* Spacing steps (unchanged from the old base.css values) */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+
+  /* Side gutter: 16px on phones, grows to 32px on desktop.
+     Every page container uses this one value, so the left edge of the
+     logo, the content and the footer line up on every page.          */
+  --gutter: clamp(16px, 4vw, 32px);
+
+  /* Page widths */
+  --container:        1200px;   /* header, footer, tool pages      */
+  --container-text:    860px;   /* reading pages (home, company)   */
+  --container-form:    680px;   /* single search box + button      */
+  --container-wide:   1400px;   /* App workspace                   */
+
+  /* Vertical rhythm */
+  --section-gap: clamp(32px, 5vw, 56px);  /* between page sections   */
+  --stack-gap:   clamp(14px, 2vw, 18px);  /* between paragraphs       */
+  --grid-gap:    clamp(12px, 2vw, 20px);  /* between cards in a grid  */
+
+  /* Padding that keeps content inside --container while the
+     element itself (for example a header bar) runs full width. */
+  --bleed-pad: max(var(--gutter), calc((100% - var(--container)) / 2 + var(--gutter)));
+}

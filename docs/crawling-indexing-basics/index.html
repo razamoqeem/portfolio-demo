@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Google Crawling &amp; Indexing Fundamentals | AMK Digital Agency</title>
+  <meta name="description" content="Googlebot must be able to find and parse your content. Key files include: Indexable File Types: Google can index most text-based files (HTML, PDF…" />
+  <script src="../../js/theme-engine.js"></script>
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Google Crawling &amp; Indexing Fundamentals | AMK Digital Agency" />
+  <meta property="og:description" content="Googlebot must be able to find and parse your content. Key files include: Indexable File Types: Google can index most text-based files (HTML, PDF…" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="../../assets/logo.png" />
+  <link rel="stylesheet" href="../../assets/site.css" />
+  <link rel="stylesheet" href="../../demo.css" />
+  <script src="../../js/demo-samples.js"></script>
+  <script src="../../script.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a class="brand" href="../../index.html"><img src="../../assets/logo.png" alt="" width="28" height="28" /> AMK Digital Agency</a>
+      <nav aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../../tools/index.html">Free Tools &amp; AI Tools</a></li>
+          <li><a href="../../docs/index.html">Docs</a></li>
+          <li><a href="../../company/index.html">Company</a></li>
+          <li><a href="../../owner/index.html">Founder</a></li>
+          <li><button type="button" class="theme-toggle-btn" aria-label="Toggle light or dark theme">🌙 Theme</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="wrap page-body">
+    <h1 class="t-size-xl t-color-ink t-op-100">Google Crawling &amp; Indexing Fundamentals</h1>
+    <h2 class="t-size-lg t-color-ink t-op-100">1. Overview of Crawling and Indexing</h2>
+    <p class="t-size-md t-color-ink t-op-100">Googlebot must be able to find and parse your content. Key files include:</p>
+    <ul class="t-size-md t-color-ink t-op-100"><li><strong>Indexable File Types</strong>: Google can index most text-based files (HTML, PDF, Office, etc.).</li><li><strong>User-Triggered Fetchers</strong>: Tools like Site Verifier or RSS readers that ignore robots.txt because they are user-initiated.</li></ul>
+    <h2 class="t-size-lg t-color-ink t-op-100">2. URL Canonicalization</h2>
+    <p class="t-size-md t-color-ink t-op-100">The process of selecting the representative URL for a piece of content.</p>
+    <ul class="t-size-md t-color-ink t-op-100"><li><strong>Duplicates</strong>: Caused by regional variants, device variants (mobile/desktop), or protocol variants (HTTP/HTTPS).</li><li><strong>Consolidation</strong>: Use <code>rel="canonical"</code> or 301 redirects to tell Google which version to index.</li></ul>
+    <h2 class="t-size-lg t-color-ink t-op-100">3. AMP on Google Search</h2>
+    <ul class="t-size-md t-color-ink t-op-100"><li>AMP pages must follow the AMP HTML spec.</li><li>Content parity is required between AMP and canonical pages.</li><li>Bidirectional linkage: Canonical links to AMP, and AMP links back to Canonical.</li></ul>
+    <h2 class="t-size-lg t-color-ink t-op-100">4. Troubleshooting Crawling Errors</h2>
+    <ul class="t-size-md t-color-ink t-op-100"><li><strong>Availability Issues</strong>: Check server capacity and firewall blocks.</li><li><strong>Crawl Efficiency</strong>: Use sitemaps and clean URL structures to help Googlebot focus on high-value pages.</li><li><strong>Overcrawling</strong>: Use <code>crawl-delay</code> (for some bots) or adjust crawl rate in Search Console if the server is struggling.</li></ul>
+    <h2 class="t-size-lg t-color-ink t-op-100">5. Pausing or Disabling a Site</h2>
+    <ul class="t-size-md t-color-ink t-op-100"><li><strong>Recommended</strong>: Limit functionality (disable cart, show banner) instead of taking the site down.</li><li><strong>Temporary Shutdown</strong>: Use <code>503 Service Unavailable</code> with a <code>Retry-After</code> header.</li><li><strong>Avoid</strong>: Returning <code>404</code> or <code>noindex</code> for temporary issues, as it removes the URL from the index.</li></ul>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <span>&copy; 2026 AMK Digital Agency</span>
+      <span></span>
+      <span class="preview-label">Beta / Preview</span>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free SEO Tools — AMK Digital Agency Suite</title>
+  <meta name="description" content="Free SEO tools from AMK Digital Agency: instant SEO audit, page analyser, domain analyser, AI search readiness check and domain age lookup. Real checks only, no estimated numbers." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/base.css?v=2026.11.14" />
+  <script src="../js/theme-engine.js?v=2026.05.17.r5"></script>
+  <style>
+    :root {
+      /* Light Mode (Default) */
+      --bg: #f8fafc;
+      --bg-alt: #f1f5f9;
+      --panel: #ffffff;
+      --panel-2: #f8fafc;
+      --border: #e2e8f0;
+      --border-2: #cbd5e1;
+      --text: #0f172a;
+      --muted: #64748b;
+      --faint: #94a3b8;
+      --accent: #4b43d6;
+      --accent2: #0f7a5c;
+      --good: #0f7a5c;
+      --warn: #b45309;
+      --bad: #e11d48;
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    html[data-theme="dark"],
+    html.dark,
+    :root.dark {
+      --bg: #0b0f19;
+      --bg-alt: #11131e;
+      --panel: #131b2e;
+      --panel-2: #1c253d;
+      --border: #232d45;
+      --border-2: #2e334a;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --faint: #64748b;
+      --accent: #6366f1;
+      --accent2: #00e5c0;
+      --good: #10b981;
+      --warn: #ffb020;
+      --bad: #ff5c6c;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, Segoe UI, Roboto, sans-serif;
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(108,99,255,.1), transparent),
+                  radial-gradient(900px 500px at -10% 110%, rgba(0,229,192,.08), transparent), var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TOP BAR ─────────────────────────────────────────── */
+    .top-bar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,11,18,.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 17px; }
+    .brand .dot { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg,var(--accent),var(--accent2)); display: flex; align-items: center; justify-content: center; font-size: 14px; }
+    .spacer { flex: 1; }
+    .btn-ghost { background: var(--panel-2); border: 1px solid var(--border); color: var(--text); padding: 9px 16px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 700; transition: .15s; }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-primary { background: linear-gradient(135deg,var(--accent),#8b7bff); border: none; color: #fff; padding: 9px 18px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 700; transition: .2s; }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(108,99,255,.4); }
+
+    /* ── HERO ───────────────────────────────────────────── */
+    .hero { text-align: center; padding: 60px 24px 48px; }
+    .hero h1 { font-size: clamp(28px, 4vw, 46px); font-weight: 900; letter-spacing: -.03em; background: linear-gradient(135deg, #fff 30%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 14px; }
+    .hero p { color: var(--muted); font-size: 16px; max-width: 520px; margin: 0 auto; line-height: 1.7; }
+    .hero-pills { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 22px; }
+    .hero-pill { font-size: 11px; font-weight: 700; padding: 5px 14px; border-radius: 20px; background: var(--panel); border: 1px solid var(--border); color: var(--muted); }
+    .hero-pill.green { border-color: var(--good); color: var(--good); background: rgba(29,209,161,.08); }
+    .hero-pill.purple { border-color: var(--accent); color: var(--accent); background: rgba(108,99,255,.08); }
+
+    /* ── TOOL GRID ─────────────────────────────────────── */
+    .tools-grid {
+      max-width: 1200px; margin: 0 auto; padding: 0 24px 80px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+      gap: 20px;
+    }
+
+    /* ── TOOL CARD ─────────────────────────────────────── */
+    .tool-card {
+      background: linear-gradient(180deg, var(--panel), var(--bg-alt));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color .2s, box-shadow .2s;
+      position: relative;
+    }
+    .tool-card:hover { border-color: var(--border-2); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
+    .tool-card-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+
+    .tool-card-header { padding: 20px 22px 14px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid var(--border); }
+    .tool-icon { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .tool-card-header h3 { font-size: 15px; font-weight: 800; color: var(--text); }
+    .tool-card-header p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .tool-badge { font-size: 9px; font-weight: 800; padding: 3px 9px; border-radius: 5px; letter-spacing: .05em; margin-left: auto; flex-shrink: 0; }
+    .badge-free { background: rgba(29,209,161,.15); color: var(--good); }
+    .badge-limited { background: rgba(255,176,32,.15); color: var(--warn); }
+    .data-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-top: 6px; letter-spacing: .02em; }
+    .data-badge.live { background: rgba(29,209,161,.15); color: var(--good); }
+    .data-badge.estimated { background: rgba(255,176,32,.15); color: var(--warn); }
+
+    .tool-card-body { padding: 18px 22px 20px; }
+    .tool-input-group { margin-bottom: 12px; }
+    .tool-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 6px; display: block; }
+    .tool-input { width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 11px 14px; border-radius: var(--radius-sm); font-size: 14px; outline: none; transition: border-color .15s; font-family: inherit; }
+    .tool-input:focus { border-color: var(--accent); }
+    .tool-input::placeholder { color: var(--faint); }
+    .tool-select { width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 11px 14px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; outline: none; cursor: pointer; }
+    .tool-run-btn { width: 100%; background: linear-gradient(135deg,var(--accent),#8b7bff); border: none; color: #fff; padding: 12px 18px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 700; cursor: pointer; transition: .2s; margin-top: 4px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .tool-run-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(108,99,255,.4); }
+    .tool-run-btn:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+
+    /* ── RESULTS PANEL ─────────────────────────────────── */
+    .tool-result { margin-top: 14px; display: none; }
+    .tool-result.active { display: block; animation: fadeUp .3s ease-out; }
+    #ia-result.active { display: grid; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .result-metric { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .result-metric:last-child { border-bottom: none; }
+    .result-metric .lbl { color: var(--muted); }
+    .result-metric .val { font-weight: 700; color: var(--text); }
+    .val.good { color: var(--good); }
+    .val.warn { color: var(--warn); }
+    .val.bad  { color: var(--bad); }
+
+    .result-score-row { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+    .score-circle { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; flex-shrink: 0; }
+    .score-good { background: rgba(29,209,161,.15); color: var(--good); border: 2px solid var(--good); }
+    .score-warn { background: rgba(255,176,32,.15); color: var(--warn); border: 2px solid var(--warn); }
+    .score-bad  { background: rgba(255,92,108,.15); color: var(--bad);  border: 2px solid var(--bad); }
+    .score-desc h4 { font-size: 14px; font-weight: 700; }
+    .score-desc p { font-size: 12px; color: var(--muted); margin-top: 3px; }
+
+    .result-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .tag { font-size: 11px; padding: 3px 10px; border-radius: 5px; font-weight: 700; }
+    .tag-good { background: rgba(29,209,161,.12); color: var(--good); }
+    .tag-bad  { background: rgba(255,92,108,.12); color: var(--bad); }
+    .tag-warn { background: rgba(255,176,32,.12); color: var(--warn); }
+    .tag-info { background: rgba(108,99,255,.12); color: var(--accent); }
+
+    .result-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 10px; }
+    .result-table th { text-align: left; padding: 6px 8px; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .05em; border-bottom: 1px solid var(--border); }
+    .result-table td { padding: 7px 8px; border-bottom: 1px solid rgba(255,255,255,.04); }
+    .result-table tr:last-child td { border-bottom: none; }
+
+    .tool-loading { display: none; text-align: center; padding: 20px; color: var(--muted); font-size: 13px; }
+    .tool-loading.active { display: block; }
+    .spin { display: inline-block; width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .7s linear infinite; margin-right: 8px; vertical-align: middle; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── LIMIT BANNER ─────────────────────────────────── */
+    .limit-banner { margin-top: 12px; background: linear-gradient(135deg, rgba(108,99,255,.12), rgba(0,229,192,.06)); border: 1px solid rgba(108,99,255,.25); border-radius: 10px; padding: 14px 16px; font-size: 12px; display: none; }
+    .limit-banner.visible { display: block; animation: fadeUp .3s; }
+    .limit-banner strong { color: var(--accent); }
+
+    /* ── KEYWORD TABLE ────────────────────────────────── */
+    .kw-bar { height: 6px; border-radius: 3px; background: var(--border); margin-top: 4px; }
+    .kw-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg,var(--accent),var(--accent2)); }
+
+    /* ── SERP PREVIEW ─────────────────────────────────── */
+    .serp-item { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 8px; }
+    .serp-pos { font-size: 10px; font-weight: 800; color: var(--muted); margin-bottom: 3px; }
+    .serp-title { font-size: 13px; font-weight: 700; color: #8ab4f8; margin-bottom: 2px; }
+    .serp-url { font-size: 11px; color: var(--good); margin-bottom: 4px; }
+    .serp-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    /* ── GEO HEATMAP ──────────────────────────────────── */
+    .geo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+    .geo-cell { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; }
+    .geo-cell .flag { font-size: 20px; }
+    .geo-cell .geo-score { font-size: 18px; font-weight: 900; }
+    .geo-cell .geo-label { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+
+    /* ── INSTANT AUDIT FINDINGS ──────────────────────────── */
+    .audit-finding { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.04); font-size: 12px; }
+    .audit-finding:last-child { border-bottom: none; }
+    .audit-sev { font-size: 9px; font-weight: 800; padding: 3px 8px; border-radius: 5px; flex-shrink: 0; letter-spacing: .04em; }
+    .audit-sev.high { background: rgba(255,92,108,.15); color: var(--bad); }
+    .audit-sev.medium { background: rgba(255,176,32,.15); color: var(--warn); }
+    .audit-sev.low { background: rgba(108,99,255,.15); color: var(--accent); }
+    .audit-critical { margin-top: 12px; background: rgba(255,92,108,.08); border-left: 3px solid var(--bad); padding: 12px 14px; border-radius: 8px; font-size: 12px; line-height: 1.5; }
+    .audit-critical strong { display: block; color: var(--bad); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+    .tool-card.featured { border-color: var(--accent); }
+    .tool-card.featured .tool-card-header { background: linear-gradient(135deg, rgba(108,99,255,.06), transparent); }
+
+    /* FOOTER */
+    .page-footer { text-align: center; padding: 28px; border-top: 1px solid var(--border); color: var(--faint); font-size: 12px; }
+  </style>
+  <script src="../js/config.js"></script>
+  <script src="../js/site.js"></script>
+  <script src="../js/tools-client.js"></script>
+  <link rel="stylesheet" href="../demo.css" />
+  <script src="../js/demo-samples.js"></script>
+  <script src="../script.js"></script>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <nav class="top-bar">
+    <div class="brand">
+      <span class="dot">✦</span>
+      AMK Digital Agency
+    </div>
+    <span class="spacer"></span>
+    <a href="#" data-app-path="/login" hidden class="btn-ghost">&larr; Workspace</a>
+    <a href="../index.html" class="btn-ghost">Home</a>
+    <a href="../tools/index.html" class="btn-ghost">Free Tools &amp; AI Tools</a>
+    <a href="../docs/index.html" class="btn-ghost">Docs</a>
+    <a href="../company/index.html" class="btn-ghost">Company</a>
+    <button type="button" class="btn-ghost theme-toggle-btn" aria-label="Toggle light or dark theme">🌙 Theme</button>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Free SEO & Digital Analysis Tools</h1>
+    <p>Professional-grade mini-analysers. Every result comes from a real check of the page you enter. No estimated or invented numbers.</p>
+    <div class="hero-pills">
+      <span class="hero-pill green">✓ Free to try</span>
+      <a class="hero-pill" href="../tools/domain-overview.html" style="text-decoration:none; color:var(--accent);">New: Domain Overview</a>
+      <span class="hero-pill">No Credit Card</span>
+      <a class="hero-pill" href="../docs/how-to-use-the-free-tools/index.html" style="text-decoration:none; color:var(--accent);">How to use these tools</a>
+    </div>
+  </div>
+
+  <p id="tools-unavailable" role="status" hidden
+     style="max-width:1200px; margin:0 auto 24px; padding:14px 18px; border:1px solid var(--border); border-radius:12px; background:var(--surface); color:var(--ink, inherit); font-size:15px; line-height:1.5;">
+    These live tools are being rebuilt and are temporarily unavailable. Please try again soon.
+    The <a href="../tools/title-generator.html">title generator</a> works now, right in your browser.
+  </p>
+
+  <p id="runs-line" role="status" hidden
+     style="max-width:1200px; margin:0 auto 16px; padding:0 24px; color:var(--muted); font-size:13px;"></p>
+  <div id="gate-panel" hidden
+     style="max-width:1152px; margin:0 auto 24px; padding:18px 20px; border:1px solid var(--accent); border-radius:12px; background:var(--panel); font-size:15px; line-height:1.5;"></div>
+
+  <!-- TOOLS GRID -->
+  <div class="tools-grid">
+
+    <!-- 0. INSTANT SEO AUDIT (real, live scan — not simulated) -->
+    <div class="tool-card featured" id="seo-audit" style="grid-column: 1 / -1; scroll-margin-top: 90px;">
+      <div class="tool-card-accent" style="background: linear-gradient(90deg, #6c63ff, #00e5c0);"></div>
+      <div class="tool-card-header">
+        <div class="tool-icon" style="background: rgba(108,99,255,.15);">⚡</div>
+        <div>
+          <h3>Instant SEO Audit</h3>
+          <p>Real live scan — health score, security, on-page metrics & top issues</p>
+        </div>
+        <span class="tool-badge badge-free">LIVE DATA</span>
+      </div>
+      <div class="tool-card-body">
+        <div style="display:flex; gap:10px; align-items:stretch; flex-wrap:wrap;">
+          <input class="tool-input" id="ia-url" type="url" placeholder="https://example.com" style="flex:1; min-width:220px;" />
+          <button class="tool-run-btn" id="ia-run-btn" onclick="runInstantAudit()" style="width:auto; padding:12px 24px; white-space:nowrap;">⚡ Run Audit</button>
+        </div>
+        <div class="tool-loading" id="ia-loading"><span class="spin"></span> Crawling site structure and analysing SEO health vectors…</div>
+        <div class="tool-result" id="ia-result" style="grid-template-columns: minmax(90px, 160px) 1fr; gap:24px; align-items:start; margin-top:16px;">
+          <div style="text-align:center;">
+            <div class="score-circle" id="ia-score-el" style="width:90px; height:90px; font-size:26px; margin:0 auto;">—</div>
+            <div id="ia-grade" style="font-size:12px; font-weight:800; margin-top:8px; color:var(--muted);"></div>
+          </div>
+          <div>
+            <h4 id="ia-domain" style="font-size:15px; word-break:break-all; margin-bottom:8px;"></h4>
+            <div class="result-metric"><span class="lbl">Crawler Access</span><span class="val" id="ia-crawler">—</span></div>
+            <div class="result-metric"><span class="lbl">Security (HTTPS)</span><span class="val" id="ia-https">—</span></div>
+            <div class="result-metric"><span class="lbl">Words on page</span><span class="val" id="ia-freshness">—</span></div>
+          </div>
+          <div style="grid-column: 1 / -1;">
+            <div class="tool-label" style="margin-bottom:6px;">Top Issues Detected</div>
+            <div id="ia-findings"></div>
+            <div class="audit-critical" id="ia-critical" style="display:none;"><strong>Most important fix</strong><span id="ia-critical-text"></span></div>
+          </div>
+        </div>
+        <div class="limit-banner" id="ia-error" style="background: rgba(255,92,108,.1); border-color: rgba(255,92,108,.3);"></div>
+      </div>
+    </div>
+
+    <!-- 3. DOMAIN URL ANALYSER -->
+    <div class="tool-card" id="card-domain">
+      <div class="tool-card-accent" style="background: linear-gradient(90deg, #ffb020, #ff5c6c);"></div>
+      <div class="tool-card-header">
+        <div class="tool-icon" style="background: rgba(255,176,32,.12);">🌐</div>
+        <div>
+          <h3>Domain URL Analyser</h3>
+          <p>Domain age, security, technology and crawl files</p>
+          <span class="data-badge live">● Live data: real crawl and registration record</span>
+        </div>
+        <span class="tool-badge badge-free">FREE</span>
+      </div>
+      <div class="tool-card-body">
+        <div class="tool-input-group">
+          <label class="tool-label">Domain or URL</label>
+          <input class="tool-input" id="dom-url" type="url" placeholder="https://example.com" />
+        </div>
+        <button class="tool-run-btn" onclick="runDomainTool()">🌐 Analyse Domain</button>
+        <div class="tool-loading" id="dom-loading"><span class="spin"></span> Resolving domain intelligence…</div>
+        <div class="tool-result" id="dom-result">
+          <div class="result-score-row">
+            <div class="score-circle" id="dom-trust-el">—</div>
+            <div class="score-desc">
+              <h4 id="dom-grade">Basic setup checks</h4>
+              <p id="dom-summary"></p>
+            </div>
+          </div>
+          <div class="result-metric"><span class="lbl">Domain Age</span><span class="val" id="dom-age">—</span></div>
+          <div class="result-metric"><span class="lbl">HTTPS / SSL</span><span class="val" id="dom-ssl">—</span></div>
+          <div class="result-metric"><span class="lbl">Sitemap Page Count</span><span class="val" id="dom-pages">—</span></div>
+          <div class="result-metric"><span class="lbl">Technology Stack</span><span class="val" id="dom-tech">—</span></div>
+          <div class="result-metric"><span class="lbl">Robots.txt</span><span class="val" id="dom-robots">—</span></div>
+          <div class="result-metric"><span class="lbl">Sitemap</span><span class="val" id="dom-sitemap">—</span></div>
+          <div class="result-tags" id="dom-tags"></div>
+        </div>
+        <div class="limit-banner" id="dom-error" style="background: rgba(255,92,108,.1); border-color: rgba(255,92,108,.3); display:none;"></div>
+      </div>
+    </div>
+
+    <!-- 5. AIEO ANALYSER -->
+    <div class="tool-card" id="card-aieo">
+      <div class="tool-card-accent" style="background: linear-gradient(90deg, #a78bfa, #6c63ff);"></div>
+      <div class="tool-card-header">
+        <div class="tool-icon" style="background: rgba(167,139,250,.12);">🤖</div>
+        <div>
+          <h3>AIEO Analyser</h3>
+          <p>Page signals that AI answer engines such as ChatGPT, Gemini and Perplexity can read</p>
+          <span class="data-badge live">● Live data: real page crawl</span>
+        </div>
+        <span class="tool-badge badge-limited">BETA</span>
+      </div>
+      <div class="tool-card-body">
+        <div class="tool-input-group">
+          <label class="tool-label">Website URL</label>
+          <input class="tool-input" id="aieo-url" type="url" placeholder="https://yoursite.com" />
+        </div>
+        <button class="tool-run-btn" onclick="runAIEOTool()">🤖 Check AI readiness signals</button>
+        <div class="tool-loading" id="aieo-loading"><span class="spin"></span> Reading the page…</div>
+        <div class="tool-result" id="aieo-result">
+          <div class="result-score-row">
+            <div class="score-circle" id="aieo-score-el">—</div>
+            <div class="score-desc">
+              <h4 id="aieo-grade">Checks passed</h4>
+              <p id="aieo-summary"></p>
+            </div>
+          </div>
+          <div class="result-metric"><span class="lbl">llms.txt Present</span><span class="val" id="aieo-llms">—</span></div>
+          <div class="result-metric"><span class="lbl">Structured Data</span><span class="val" id="aieo-schema">—</span></div>
+          <div class="result-metric"><span class="lbl">Organisation or person markup</span><span class="val" id="aieo-eeat">—</span></div>
+          <div class="result-metric"><span class="lbl">Structured Data Types</span><span class="val" id="aieo-types">—</span></div>
+          <div class="result-metric"><span class="lbl">Social preview tags</span><span class="val" id="aieo-og">—</span></div>
+          <div class="result-metric"><span class="lbl">Words on page</span><span class="val" id="aieo-words">—</span></div>
+        </div>
+        <div class="limit-banner" id="aieo-error" style="background: rgba(255,92,108,.1); border-color: rgba(255,92,108,.3); display:none;"></div>
+      </div>
+    </div>
+
+    <!-- 7. SEO ANALYSIS -->
+    <div class="tool-card" id="card-seo">
+      <div class="tool-card-accent" style="background: linear-gradient(90deg, #6c63ff, #ff5c6c);"></div>
+      <div class="tool-card-header">
+        <div class="tool-icon" style="background: rgba(108,99,255,.15);">🔬</div>
+        <div>
+          <h3>SEO Page Analyser</h3>
+          <p>On-page score, meta tags, headings & content quality</p>
+          <span class="data-badge live">● Live data — real page crawl</span>
+        </div>
+        <span class="tool-badge badge-free">FREE</span>
+      </div>
+      <div class="tool-card-body">
+        <div class="tool-input-group">
+          <label class="tool-label">Page URL</label>
+          <input class="tool-input" id="seo-url" type="url" placeholder="https://yourpage.com/blog-post" />
+        </div>
+        <div class="tool-input-group">
+          <label class="tool-label">Focus Keyword (optional)</label>
+          <input class="tool-input" id="seo-kw" type="text" placeholder="e.g. SEO services Pakistan" />
+        </div>
+        <button class="tool-run-btn" onclick="runSEOTool()">🔬 Analyse Page SEO</button>
+        <div class="tool-loading" id="seo-loading"><span class="spin"></span> Running SEO scan…</div>
+        <div class="tool-result" id="seo-result">
+          <div class="result-score-row">
+            <div class="score-circle" id="seo-score-el">—</div>
+            <div class="score-desc">
+              <h4 id="seo-grade">SEO Score</h4>
+              <p id="seo-summary">Overall page SEO health</p>
+            </div>
+          </div>
+          <div class="result-metric"><span class="lbl">Title Tag</span><span class="val" id="seo-title">—</span></div>
+          <div class="result-metric"><span class="lbl">Meta Description</span><span class="val" id="seo-desc">—</span></div>
+          <div class="result-metric"><span class="lbl">H1 Tag</span><span class="val" id="seo-h1">—</span></div>
+          <div class="result-metric"><span class="lbl">Word Count</span><span class="val" id="seo-words">—</span></div>
+          <div class="result-metric"><span class="lbl">Image Alt Coverage</span><span class="val" id="seo-alts">—</span></div>
+          <div class="result-metric"><span class="lbl">Schema Markup</span><span class="val" id="seo-schema">—</span></div>
+          <div class="result-tags" id="seo-tags"></div>
+        </div>
+        <div class="limit-banner" id="seo-error" style="background: rgba(255,92,108,.1); border-color: rgba(255,92,108,.3); display:none;"></div>
+      </div>
+    </div>
+
+    <!-- 9. DOMAIN AGE ANALYSER -->
+    <div class="tool-card" id="card-age">
+      <div class="tool-card-accent" style="background: linear-gradient(90deg, #00e5c0, #1dd1a1);"></div>
+      <div class="tool-card-header">
+        <div class="tool-icon" style="background: rgba(0,229,192,.12);">📅</div>
+        <div>
+          <h3>Domain Age Checker</h3>
+          <p>Registration date and age from the public registration record</p>
+          <span class="data-badge live">● Live data: public registration record</span>
+        </div>
+        <span class="tool-badge badge-free">FREE</span>
+      </div>
+      <div class="tool-card-body">
+        <div class="tool-input-group">
+          <label class="tool-label">Domain or URL</label>
+          <input class="tool-input" id="age-url" type="url" placeholder="https://example.com" />
+        </div>
+        <button class="tool-run-btn" onclick="runAgeTool()">📅 Check Domain Age</button>
+        <div class="tool-loading" id="age-loading"><span class="spin"></span> Looking up domain registration history…</div>
+        <div class="tool-result" id="age-result">
+          <div class="result-score-row">
+            <div class="score-circle" id="age-score-el">—</div>
+            <div class="score-desc">
+              <h4 id="age-grade">Domain Age</h4>
+              <p id="age-summary">Registration history assessment</p>
+            </div>
+          </div>
+          <div class="result-metric"><span class="lbl">Registration Date</span><span class="val" id="age-reg-date">—</span></div>
+          <div class="result-metric"><span class="lbl">Age</span><span class="val" id="age-years">—</span></div>
+          <div class="result-metric"><span class="lbl">Expires</span><span class="val" id="age-expires">—</span></div>
+          <div class="result-metric"><span class="lbl">Registrar</span><span class="val" id="age-registrar">—</span></div>
+          <div class="result-tags" id="age-tags"></div>
+        </div>
+        <div class="limit-banner" id="age-error" style="background: rgba(255,92,108,.1); border-color: rgba(255,92,108,.3); display:none;"></div>
+      </div>
+    </div>
+
+    <!-- DOMAIN RANK (shown only when the service has a key) -->
+    <div class="tool-card" id="card-rank" hidden>
+      <div class="tool-card-accent" style="background: linear-gradient(90deg, #6c63ff, #1dd1a1);"></div>
+      <div class="tool-card-header">
+        <div class="tool-icon" style="background: rgba(108,99,255,.15);">📈</div>
+        <div>
+          <h3>Domain Rank Checker</h3>
+          <p>A public link-based score from 0 to 10, with the number of sites linking in</p>
+          <span class="data-badge live">● Live data: Open PageRank</span>
+        </div>
+        <span class="tool-badge badge-free">FREE</span>
+      </div>
+      <div class="tool-card-body">
+        <div class="tool-input-group">
+          <label class="tool-label">Domain or URL</label>
+          <input class="tool-input" id="rank-url" type="url" placeholder="https://example.com" />
+        </div>
+        <button class="tool-run-btn" onclick="runRankTool()">📈 Check Domain Rank</button>
+        <div class="tool-loading" id="rank-loading"><span class="spin"></span> Looking up the rank record…</div>
+        <div class="tool-result" id="rank-result">
+          <div class="result-score-row">
+            <div class="score-circle" id="rank-score-el">—</div>
+            <div class="score-desc">
+              <h4>Domain rank (0 to 10)</h4>
+              <p id="rank-summary"></p>
+            </div>
+          </div>
+          <div class="result-metric"><span class="lbl">Position among all ranked domains</span><span class="val" id="rank-position">—</span></div>
+          <div class="result-metric"><span class="lbl">Referring domains</span><span class="val" id="rank-refs">—</span></div>
+          <div class="result-metric"><span class="lbl">Data date</span><span class="val" id="rank-date">—</span></div>
+          <div class="result-tags"><span class="tag tag-info">Source: Open PageRank. This is not a Google score.</span></div>
+        </div>
+        <div class="limit-banner" id="rank-error" style="background: rgba(255,92,108,.1); border-color: rgba(255,92,108,.3); display:none;"></div>
+      </div>
+    </div>
+
+  </div><!-- /tools-grid -->
+
+  <footer class="page-footer">
+    © 2026 AMK Digital Agency — Free tools for the digital marketing community. <a href="../docs/how-to-use-the-free-tools/index.html" style="color:var(--accent);">How to use these tools</a>
+  </footer>
+
+  <script>
+  'use strict';
+
+  // ── Shared helpers ───────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', function () {
+    if (TOOLS_API) return;
+    var notice = document.getElementById('tools-unavailable');
+    if (notice) notice.hidden = false;
+    document.querySelectorAll('.tool-card button').forEach(function (btn) {
+      btn.disabled = true;
+      btn.title = 'Temporarily unavailable';
+    });
+  });
+
+  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  function setLoading(id, on) {
+    document.getElementById(id + '-loading').classList.toggle('active', on);
+    document.getElementById(id + '-result').classList.toggle('active', !on && document.getElementById(id + '-result').dataset.ready === '1');
+  }
+
+  function showResult(id) {
+    const el = document.getElementById(id + '-result');
+    el.dataset.ready = '1';
+    el.classList.add('active');
+  }
+
+  function normUrl(raw) {
+    try {
+      let u = raw.trim();
+      if (!u.startsWith('http')) u = 'https://' + u;
+      return new URL(u).hostname.replace('www.', '');
+    } catch { return raw.trim().replace(/^https?:\/\/(www\.)?/, '').split('/')[0]; }
+  }
+
+  // Seeded random for consistent results per domain
+  function scoreClass(s) {
+    return s >= 70 ? 'score-good' : s >= 45 ? 'score-warn' : 'score-bad';
+  }
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[m]));
+  }
+
+  // ── 0. INSTANT SEO AUDIT (real, live scan) ───────────────
+  async function runInstantAudit() {
+    const input = document.getElementById('ia-url');
+    let raw = input.value.trim();
+    if (!raw) { input.focus(); return; }
+    let url = raw;
+    if (!url.startsWith('http://') && !url.startsWith('https://')) url = 'https://' + url;
+    input.value = url;
+
+    const btn = document.getElementById('ia-run-btn');
+    const errEl = document.getElementById('ia-error');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spin" style="width:14px;height:14px;margin-right:6px;"></span> Scanning…';
+    document.getElementById('ia-loading').classList.add('active');
+    document.getElementById('ia-result').classList.remove('active');
+    errEl.classList.remove('visible');
+
+    try {
+      const data = await callTool('seo-audit', { url });
+
+      const score = data.score || 0;
+      const el = document.getElementById('ia-score-el');
+      el.textContent = score;
+      el.className = 'score-circle ' + scoreClass(score);
+      document.getElementById('ia-grade').textContent = 'GRADE ' + (data.grade || '—');
+      document.getElementById('ia-domain').textContent = data.domain || url;
+      document.getElementById('ia-crawler').textContent = data.metrics?.crawler_access || '—';
+      document.getElementById('ia-https').textContent = data.metrics?.https || '—';
+      document.getElementById('ia-freshness').textContent = data.metrics?.word_count != null ? data.metrics.word_count + ' words' : '—';
+
+      const findings = data.top_findings || [];
+      document.getElementById('ia-findings').innerHTML = findings.length
+        ? findings.map(f => {
+            const sev = (f.severity || 'LOW').toLowerCase();
+            return `<div class="audit-finding"><span class="audit-sev ${sev}">${esc(f.severity)}</span><span>${esc(f.title)}</span></div>`;
+          }).join('')
+        : '<div class="audit-finding"><span>No issues found by these checks.</span></div>';
+
+      const criticalEl = document.getElementById('ia-critical');
+      if (data.most_important_fix) {
+        document.getElementById('ia-critical-text').textContent = data.most_important_fix;
+        criticalEl.style.display = 'block';
+      } else {
+        criticalEl.style.display = 'none';
+      }
+
+      showResult('ia');
+    } catch (err) {
+      // The server already sends a complete, plain-language sentence.
+      errEl.textContent = String(err.message || 'The audit did not finish. Please try again.');
+      errEl.classList.add('visible');
+    } finally {
+      document.getElementById('ia-loading').classList.remove('active');
+      btn.disabled = false;
+      btn.innerHTML = '⚡ Run Audit';
+    }
+  }
+
+  // Auto-run if ?url= is present (matches the previous /tools/seo-audit.html behaviour)
+  (function () {
+    const qp = new URLSearchParams(location.search).get('url');
+    if (qp) {
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('ia-url').value = qp;
+        runInstantAudit();
+      });
+    }
+  })();
+
+  // ── 1. BACKLINK ANALYSER ─────────────────────────────────
+  async function runDomainTool() {
+    const raw = document.getElementById('dom-url').value.trim();
+    if (!raw) { document.getElementById('dom-url').focus(); return; }
+    const domain = normUrl(raw);
+
+    const errEl = document.getElementById('dom-error');
+    errEl.style.display = 'none';
+    document.getElementById('dom-loading').classList.add('active');
+    document.getElementById('dom-result').classList.remove('active');
+
+    try {
+      const scan = await callTool('site-scan', { url: raw });
+      let age = null;
+      try { age = await callTool('domain-age', { domain }); } catch (e) { age = null; }
+      document.getElementById('dom-loading').classList.remove('active');
+
+      const sec = scan.security || {};
+      const crawl = scan.crawlability || {};
+      const tech = scan.tech_stack || {};
+      const ageYears = age ? Math.floor(age.age_days / 365) : null;
+
+      const checks = [sec.https, sec.ssl_valid, crawl.robots_txt, (crawl.sitemaps || []).length > 0];
+      const passed = checks.filter(Boolean).length;
+      const trustEl = document.getElementById('dom-trust-el');
+      trustEl.textContent = passed + '/' + checks.length;
+      trustEl.className = 'score-circle ' + (passed === checks.length ? 'score-good' : passed >= 2 ? 'score-warn' : 'score-bad');
+      document.getElementById('dom-grade').textContent = 'Basic setup checks passed';
+      document.getElementById('dom-summary').textContent = (scan.domain || domain) + ': HTTPS, valid certificate, robots.txt, sitemap';
+      document.getElementById('dom-age').textContent = ageYears !== null ? (ageYears === 0 ? '< 1 year' : ageYears + ' year' + (ageYears > 1 ? 's' : '')) : 'Unavailable';
+      document.getElementById('dom-ssl').innerHTML = sec.https
+        ? (sec.ssl_valid ? '<span class="val good">✓ Active SSL</span>' : '<span class="val warn">⚠ HTTPS, SSL issue</span>')
+        : '<span class="val bad">✗ Not secure (no HTTPS)</span>';
+      document.getElementById('dom-pages').textContent = crawl.sitemap_url_count
+        ? crawl.sitemap_url_count.toLocaleString() + ' URLs in sitemap'
+        : 'Unknown (no sitemap)';
+      document.getElementById('dom-tech').textContent = (tech.detected && tech.detected.length) ? tech.detected.join(', ') : 'Not detected';
+      document.getElementById('dom-robots').innerHTML = crawl.robots_txt ? '<span class="val good">✓ Present</span>' : '<span class="val bad">✗ Missing</span>';
+      document.getElementById('dom-sitemap').innerHTML = (crawl.sitemaps || []).length ? '<span class="val good">✓ Found</span>' : '<span class="val warn">⚠ Not Found</span>';
+
+      const tagsEl = document.getElementById('dom-tags');
+      tagsEl.innerHTML = [
+        (ageYears !== null && ageYears >= 3) ? '<span class="tag tag-info">Established Domain</span>' : '<span class="tag tag-warn">Under 3 years or age unknown</span>',
+        sec.https ? '<span class="tag tag-info">SSL Active</span>' : '<span class="tag tag-bad">No SSL</span>'
+      ].join('');
+
+      showResult('dom');
+    } catch (err) {
+      document.getElementById('dom-loading').classList.remove('active');
+      errEl.style.display = 'block';
+      errEl.innerHTML = esc(err.message);
+    }
+  }
+
+  // ── AI readiness checks ─────────────────────────────────────
+  async function runAIEOTool() {
+    const raw = document.getElementById('aieo-url').value.trim();
+    if (!raw) { document.getElementById('aieo-url').focus(); return; }
+    const domain = normUrl(raw);
+
+    const errEl = document.getElementById('aieo-error');
+    errEl.style.display = 'none';
+    document.getElementById('aieo-loading').classList.add('active');
+    document.getElementById('aieo-result').classList.remove('active');
+
+    try {
+      const scan = await callTool('site-scan', { url: raw });
+      document.getElementById('aieo-loading').classList.remove('active');
+
+      const sd = scan.structured_data || {};
+      const llms = scan.llms_txt || {};
+      const images = scan.images || {};
+      const intl = scan.international || {};
+      const social = scan.social || {};
+      const onPage = scan.on_page || {};
+      const types = sd.types || [];
+      const og = social.open_graph || {};
+
+      // Plain yes / no checks from the crawl. No score is modelled on top of them.
+      const hasEntity = types.some(t => ['Organization', 'Person', 'LocalBusiness'].includes(t));
+      const ogCount = Object.keys(og).length;
+      const checks = [!!llms.present, (sd.blocks || 0) > 0, hasEntity, ogCount > 0];
+      const passed = checks.filter(Boolean).length;
+      const el = document.getElementById('aieo-score-el');
+      el.textContent = passed + '/' + checks.length;
+      el.className = 'score-circle ' + (passed === checks.length ? 'score-good' : passed >= 2 ? 'score-warn' : 'score-bad');
+      document.getElementById('aieo-grade').textContent = 'Checks passed';
+      document.getElementById('aieo-summary').textContent = (scan.domain || domain) + ': llms.txt, structured data, organisation or person markup, social preview tags';
+
+      document.getElementById('aieo-llms').innerHTML = llms.present ? '<span class="val good">✓ Present</span>' : '<span class="val bad">✗ Missing — add /llms.txt</span>';
+      document.getElementById('aieo-schema').textContent = (sd.blocks || 0) + ' block' + (sd.blocks === 1 ? '' : 's') + ', ' + types.length + ' type' + (types.length === 1 ? '' : 's');
+      document.getElementById('aieo-eeat').innerHTML = hasEntity ? '<span class="val good">✓ Found</span>' : '<span class="val warn">Not found</span>';
+      document.getElementById('aieo-types').textContent = types.length ? types.join(', ') : 'None found';
+      document.getElementById('aieo-og').textContent = ogCount ? ogCount + ' Open Graph tag' + (ogCount === 1 ? '' : 's') : 'None found';
+      document.getElementById('aieo-words').textContent = onPage.word_count != null ? onPage.word_count.toLocaleString() + ' words' : '—';
+
+      showResult('aieo');
+    } catch (err) {
+      document.getElementById('aieo-loading').classList.remove('active');
+      errEl.style.display = 'block';
+      errEl.innerHTML = esc(err.message);
+    }
+  }
+
+  // ── Page SEO check ───────────────────────────────────────
+  async function runSEOTool() {
+    const raw = document.getElementById('seo-url').value.trim();
+    const kw = document.getElementById('seo-kw').value.trim();
+    if (!raw) { document.getElementById('seo-url').focus(); return; }
+    const domain = normUrl(raw);
+
+    const errEl = document.getElementById('seo-error');
+    errEl.style.display = 'none';
+    document.getElementById('seo-loading').classList.add('active');
+    document.getElementById('seo-result').classList.remove('active');
+
+    try {
+      const scan = await callTool('site-scan', { url: raw, keyword: kw });
+      document.getElementById('seo-loading').classList.remove('active');
+
+      const onPage = scan.on_page || {};
+      const images = scan.images || {};
+      const sd = scan.structured_data || {};
+      const score = scan.score;
+      const titleLen = onPage.title_len || 0;
+      const descLen = onPage.desc_len || 0;
+      const h1Count = onPage.h1_count || 0;
+      const wordCount = onPage.word_count || 0;
+      const altPct = images.alt_coverage_pct != null ? images.alt_coverage_pct : 100;
+      const hasSchema = (sd.blocks || 0) > 0;
+
+      const scoreEl = document.getElementById('seo-score-el');
+      scoreEl.textContent = score;
+      scoreEl.className = 'score-circle ' + scoreClass(score);
+      document.getElementById('seo-grade').textContent = score >= 70 ? 'Well Optimised' : score >= 50 ? 'Needs Work' : 'Critical Issues';
+      document.getElementById('seo-summary').textContent = `${scan.domain || domain}`;
+
+      document.getElementById('seo-title').textContent = titleLen + ' chars' + (titleLen >= 50 && titleLen <= 60 ? ' ✓' : titleLen > 60 ? ' (too long)' : ' (too short)');
+      document.getElementById('seo-title').className = 'val ' + (titleLen >= 50 && titleLen <= 60 ? 'good' : 'warn');
+      document.getElementById('seo-desc').textContent = descLen === 0 ? 'Missing' : descLen + ' chars' + (descLen >= 120 && descLen <= 160 ? ' ✓' : ' — adjust to 120–160');
+      document.getElementById('seo-desc').className = 'val ' + (descLen >= 120 && descLen <= 160 ? 'good' : 'warn');
+      document.getElementById('seo-h1').innerHTML = h1Count === 1 ? '<span class="val good">✓ Single H1</span>' : h1Count === 0 ? '<span class="val bad">✗ No H1 Found</span>' : '<span class="val warn">⚠ Multiple H1s</span>';
+      document.getElementById('seo-words').textContent = wordCount.toLocaleString() + ' words';
+      document.getElementById('seo-words').className = 'val ' + (wordCount >= 600 ? 'good' : 'warn');
+      document.getElementById('seo-alts').textContent = altPct + '%';
+      document.getElementById('seo-alts').className = 'val ' + (altPct >= 80 ? 'good' : altPct >= 50 ? 'warn' : 'bad');
+      document.getElementById('seo-schema').innerHTML = hasSchema ? '<span class="val good">✓ Present</span>' : '<span class="val bad">✗ No Schema Markup</span>';
+
+      const issues = [];
+      if (titleLen < 50) issues.push('<span class="tag tag-bad">Short Title</span>');
+      if (h1Count !== 1) issues.push('<span class="tag tag-bad">H1 Issue</span>');
+      if (altPct < 80) issues.push('<span class="tag tag-warn">Missing Alt Text</span>');
+      if (!hasSchema) issues.push('<span class="tag tag-warn">Add Schema</span>');
+      if (wordCount >= 600) issues.push('<span class="tag tag-good">Good Content Length</span>');
+      if (kw && scan.keyword_match) {
+        issues.push(scan.keyword_match.in_title
+          ? '<span class="tag tag-good">Keyword in Title</span>'
+          : '<span class="tag tag-warn">Keyword Missing from Title</span>');
+      }
+      document.getElementById('seo-tags').innerHTML = issues.join('');
+
+      showResult('seo');
+    } catch (err) {
+      document.getElementById('seo-loading').classList.remove('active');
+      errEl.style.display = 'block';
+      errEl.innerHTML = esc(err.message);
+    }
+  }
+
+  // ── Domain age ──────────────────────────
+  async function runAgeTool() {
+    const raw = document.getElementById('age-url').value.trim();
+    if (!raw) { document.getElementById('age-url').focus(); return; }
+    const domain = normUrl(raw);
+
+    const errEl = document.getElementById('age-error');
+    errEl.style.display = 'none';
+    document.getElementById('age-loading').classList.add('active');
+    document.getElementById('age-result').classList.remove('active');
+
+    try {
+      const data = await callTool('domain-age', { domain });
+      document.getElementById('age-loading').classList.remove('active');
+
+      const regDate = new Date(data.registered_on);
+      const expDate = data.expires_on ? new Date(data.expires_on) : null;
+      const totalDays = data.age_days;
+      const years = Math.floor(totalDays / 365);
+      const months = Math.floor((totalDays % 365) / 30);
+      const ageLabel = years > 0
+        ? `${years} year${years > 1 ? 's' : ''}${months > 0 ? `, ${months} mo` : ''}`
+        : `${months} month${months !== 1 ? 's' : ''}`;
+      const el = document.getElementById('age-score-el');
+      el.textContent = years > 0 ? years + 'y' : months + 'm';
+      el.className = 'score-circle ' + (years >= 5 ? 'score-good' : years >= 2 ? 'score-warn' : 'score-bad');
+      document.getElementById('age-grade').textContent = years >= 5 ? 'Registered 5+ years ago' : years >= 2 ? 'Registered 2+ years ago' : 'Registered recently';
+      document.getElementById('age-summary').textContent = domain;
+      document.getElementById('age-reg-date').textContent = regDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      document.getElementById('age-years').textContent = ageLabel;
+      document.getElementById('age-expires').textContent = expDate ? expDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Not disclosed';
+      document.getElementById('age-registrar').textContent = data.registrar || 'Not disclosed';
+
+      document.getElementById('age-tags').innerHTML = [
+        '<span class="tag tag-info">Source: ' + (data.source === 'rdap' ? 'registry record (RDAP)' : 'registry record (WHOIS)') + '</span>',
+      ].join('');
+
+      showResult('age');
+    } catch (err) {
+      document.getElementById('age-loading').classList.remove('active');
+      errEl.style.display = 'block';
+      errEl.innerHTML = esc(err.message);
+    }
+  }
+
+  // ── Domain rank ──────────────────────────────────────────
+  async function runRankTool() {
+    const raw = document.getElementById('rank-url').value.trim();
+    if (!raw) { document.getElementById('rank-url').focus(); return; }
+    const domain = normUrl(raw);
+    const errEl = document.getElementById('rank-error');
+    errEl.style.display = 'none';
+    document.getElementById('rank-loading').classList.add('active');
+    document.getElementById('rank-result').classList.remove('active');
+    try {
+      const data = await callTool('domain-rank', { domain });
+      document.getElementById('rank-loading').classList.remove('active');
+      const score = Number(data.rank_score);
+      const el = document.getElementById('rank-score-el');
+      el.textContent = score;
+      el.className = 'score-circle ' + (score >= 6 ? 'score-good' : score >= 3 ? 'score-warn' : 'score-bad');
+      document.getElementById('rank-summary').textContent = data.domain;
+      document.getElementById('rank-position').textContent = data.global_position != null ? '#' + Number(data.global_position).toLocaleString() : 'Not published';
+      document.getElementById('rank-refs').textContent = data.referring_domains != null ? Number(data.referring_domains).toLocaleString() : 'Not published';
+      document.getElementById('rank-date').textContent = data.data_date || 'Not published';
+      showResult('rank');
+    } catch (err) {
+      document.getElementById('rank-loading').classList.remove('active');
+      errEl.style.display = 'block';
+      errEl.innerHTML = esc(err.message);
+    }
+  }
+  </script>
+</body>
+</html>

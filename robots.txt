@@ -1,0 +1,3 @@
+# Static showcase copy: not for search engines.
+User-agent: *
+Disallow: /

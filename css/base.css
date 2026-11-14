@@ -1,0 +1,322 @@
+/* ============================================================
+   AMK Digital Agency — BASE.CSS
+   Design tokens, CSS reset, typography
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* Colours, fonts, text sizes, corners and shadows: theme.css (one place).
+   Widths, gutters and spacing steps (--space-*): spacing.css.            */
+@import url("theme.css");
+@import url("spacing.css");
+
+/* ─── NAMES USED BY THESE PAGES → THEME TOKENS ──────────────
+   Do not put colour values here. Change theme.css instead.
+   The glass surfaces are see-through mixes of the theme colours,
+   so they follow the palette and the light/dark switch.        */
+:root {
+  /* Backgrounds */
+  --bg:              var(--theme-page);
+  --bg-alt:          var(--theme-page-alt);
+  --bg-dark:         #000000;
+
+  /* Glass Surfaces */
+  --surface:         color-mix(in srgb, var(--theme-surface) 75%, transparent);
+  --surface-strong:  color-mix(in srgb, var(--theme-surface) 92%, transparent);
+  --surface-dark:    color-mix(in srgb, var(--theme-page) 85%, transparent);
+  --surface-hover:   color-mix(in srgb, var(--theme-surface) 90%, transparent);
+
+  /* Brand Colors */
+  --accent:          var(--theme-brand);
+  --accent-light:    color-mix(in srgb, var(--theme-brand) 12%, transparent);
+  --accent-glow:     color-mix(in srgb, var(--theme-brand) 35%, transparent);
+  --accent-2:        var(--theme-brand-2);
+  --accent-2-light:  color-mix(in srgb, var(--theme-brand-2) 12%, transparent);
+  --accent-warn:     var(--theme-warning);
+  --accent-error:    var(--theme-danger);
+  --accent-success:  var(--theme-success);
+
+  /* Text */
+  --text:            var(--theme-text);
+  --text-soft:       var(--theme-text-soft);
+  --text-muted:      var(--theme-text-muted);
+  --text-faint:      var(--theme-text-faint);
+  --text-on-accent:  var(--theme-on-brand);
+
+  /* Borders */
+  --border:          var(--theme-border);
+  --border-strong:   var(--theme-border-strong);
+  --border-hover:    color-mix(in srgb, var(--theme-brand) 35%, transparent);
+  --border-glass:    color-mix(in srgb, var(--theme-surface) 45%, transparent);
+
+  /* Shadows */
+  --shadow-sm:   var(--theme-shadow-sm);
+  --shadow-md:   var(--theme-shadow-md);
+  --shadow-lg:   var(--theme-shadow-lg);
+  --shadow-xl:   var(--theme-shadow-lg);
+  --shadow-glow: 0 0 30px color-mix(in srgb, var(--theme-brand) 25%, transparent);
+
+  /* Glass */
+  --blur:        blur(20px);
+  --blur-sm:     blur(10px);
+  --blur-lg:     blur(40px);
+
+  /* Radius */
+  --radius-sm:   var(--theme-radius-sm);
+  --radius-md:   var(--theme-radius-lg);
+  --radius-lg:   var(--theme-radius-xl);
+  --radius-xl:   var(--theme-radius-2xl);
+  --radius-full: var(--theme-radius-full);
+
+  /* Typography */
+  --font-body:    var(--theme-font-body);
+  --font-heading: var(--theme-font-heading);
+  --font-mono:    var(--theme-font-mono);
+  --font-head:    var(--font-heading);   /* older name */
+  --letter-spacing-heading: var(--theme-tracking-heading);
+  --letter-spacing-body:    var(--theme-tracking-body);
+  --letter-spacing-badge:   var(--theme-tracking-badge);
+
+  /* Motion */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --t-fast:   0.15s;
+  --t-base:   0.25s;
+  --t-slow:   0.4s;
+  --t-enter:  0.6s;
+
+  /* Z-Layers */
+  --z-base:    1;
+  --z-card:    10;
+  --z-sticky:  100;
+  --z-header:  200;
+  --z-overlay: 300;
+  --z-modal:   400;
+  --z-toast:   500;
+}
+
+/* ─── CSS RESET ─────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── TYPOGRAPHY SCALE ───────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.15;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(40px, 6vw, 80px); }
+h2 { font-size: clamp(28px, 4vw, 52px); }
+h3 { font-size: clamp(20px, 2.5vw, 30px); }
+h4 { font-size: 20px; font-weight: 700; }
+h5 { font-size: 16px; font-weight: 700; }
+h6 { font-size: 14px; font-weight: 600; }
+
+p {
+  color: var(--text-soft);
+  line-height: 1.75;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--t-base) var(--ease-smooth);
+}
+
+a:hover { color: var(--text); }
+
+strong { font-weight: 700; color: var(--text); }
+
+code, pre, kbd {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+}
+
+img, video, svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input, select, textarea {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+ul, ol { list-style: none; }
+
+/* ─── UTILITY CLASSES ───────────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hidden   { display: none !important; }
+.visible  { display: block !important; }
+.flex     { display: flex !important; }
+.grid     { display: grid !important; }
+
+.text-accent  { color: var(--accent) !important; }
+.text-muted   { color: var(--text-muted) !important; }
+.text-center  { text-align: center; }
+.text-left    { text-align: left; }
+
+.w-full  { width: 100%; }
+.h-full  { height: 100%; }
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ─── KEYFRAME ANIMATIONS ───────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+@keyframes floatOrb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(30px, -20px) scale(1.05); }
+  66%       { transform: translate(-20px, 15px) scale(0.97); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px var(--accent-glow); }
+  50%       { box-shadow: 0 0 40px color-mix(in srgb, var(--theme-brand) 55%, transparent); }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes progressFill {
+  from { width: 0%; }
+}
+
+/* ─── REVEAL ANIMATIONS (IntersectionObserver) ──────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity var(--t-enter) var(--ease-out),
+              transform var(--t-enter) var(--ease-out);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity var(--t-enter) var(--ease-out),
+              transform var(--t-enter) var(--ease-out);
+}
+
+.reveal-left.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity var(--t-enter) var(--ease-out),
+              transform var(--t-enter) var(--ease-out);
+}
+
+.reveal-right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger children */
+.stagger > *:nth-child(1) { transition-delay: 0.05s; }
+.stagger > *:nth-child(2) { transition-delay: 0.12s; }
+.stagger > *:nth-child(3) { transition-delay: 0.19s; }
+.stagger > *:nth-child(4) { transition-delay: 0.26s; }
+.stagger > *:nth-child(5) { transition-delay: 0.33s; }
+.stagger > *:nth-child(6) { transition-delay: 0.40s; }
+
+/* ─── SCROLLBAR ─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--theme-brand) 25%, transparent);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--theme-brand) 45%, transparent);
+}
+
+/* ─── SELECTION ─────────────────────────────────────────── */
+::selection {
+  background: var(--accent-light);
+  color: var(--accent);
+}

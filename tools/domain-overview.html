@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Domain Overview: Free SEO Check | AMK Digital Agency</title>
+  <meta name="description" content="Enter a domain and get one free report: SEO health, domain rank, referring domains, technical SEO status, registration, security and technology." />
+  <link rel="icon" href="../assets/logo.png" />
+  <link rel="stylesheet" href="../tools/overview.css" />
+  <script src="../js/config.js"></script>
+  <script src="../js/site.js" defer></script>
+  <script src="../js/tools-client.js" defer></script>
+  <script src="../js/domain-overview.js" defer></script>
+  <link rel="stylesheet" href="../demo.css" />
+  <script src="../js/demo-samples.js"></script>
+  <script src="../script.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="top">
+    <a class="brand" href="../index.html"><img src="../assets/logo.png" alt="" width="28" height="28" /> AMK Digital Agency</a>
+    <nav aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../tools/free-tools.html">Free tools</a>
+      <a href="../docs/index.html">Docs</a>
+      <a href="../docs/how-to-use-the-free-tools/index.html">How to use</a>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero">
+      <h1>Domain Overview</h1>
+      <p>One report for a whole website: SEO health, link strength, technical status, registration and security. Every number is a real check or comes from a named source. Where we have no data, we say so.</p>
+      <form id="ov-form" class="search">
+        <label class="sr-only" for="ov-domain">Domain</label>
+        <input id="ov-domain" class="tool-input" type="text" inputmode="url" autocomplete="off" placeholder="example.com" required />
+        <button id="ov-run" class="tool-run-btn" type="submit">Get overview</button>
+      </form>
+      <p id="runs-line" class="runs-line" role="status" data-tool="domain-overview" hidden></p>
+      <p id="tools-unavailable" class="notice" role="status" hidden>This tool is temporarily unavailable. Please try again soon.</p>
+    </section>
+
+    <div id="gate-panel" class="gate-panel" hidden></div>
+    <p id="ov-loading" class="notice" role="status" hidden>Checking the website, its registration record and its rank. This can take up to 20 seconds.</p>
+    <p id="ov-error" class="notice bad" role="alert" hidden></p>
+
+    <div id="ov-result" hidden>
+      <p id="ov-meta" class="meta"></p>
+
+      <section aria-labelledby="h-summary">
+        <h2 id="h-summary">Summary</h2>
+        <div id="ov-cards" class="cards"></div>
+      </section>
+
+      <section aria-labelledby="h-auth">
+        <h2 id="h-auth">Authority and links</h2>
+        <div id="ov-authority" class="panel"></div>
+      </section>
+
+      <section aria-labelledby="h-tech">
+        <h2 id="h-tech">Technical SEO status</h2>
+        <div id="ov-technical" class="panel"></div>
+      </section>
+
+      <section aria-labelledby="h-issues">
+        <h2 id="h-issues">Top issues to fix</h2>
+        <div id="ov-issues" class="panel"></div>
+      </section>
+
+      <section aria-labelledby="h-health">
+        <h2 id="h-health">Domain health</h2>
+        <div id="ov-health" class="panel"></div>
+      </section>
+
+      <section aria-labelledby="h-missing">
+        <h2 id="h-missing">Not available yet</h2>
+        <p class="meta">These parts need a licensed data provider that is not connected. We show nothing here instead of guessing.</p>
+        <div class="cards">
+          <div class="card off"><h3>Traffic</h3><p>Organic and paid traffic estimates, trends, countries, top pages.</p><span class="tag">Not connected</span></div>
+          <div class="card off"><h3>Organic keywords</h3><p>Ranking keywords, positions, search volume, keyword difficulty.</p><span class="tag">Not connected</span></div>
+          <div class="card off"><h3>Backlink details</h3><p>Total backlinks, follow and nofollow, anchor text, new and lost links.</p><span class="tag">Not connected</span></div>
+          <div class="card off"><h3>Competitors</h3><p>Competing domains, keyword gaps and backlink gaps.</p><span class="tag">Not connected</span></div>
+          <div class="card off"><h3>Page speed</h3><p>Loading performance and Core Web Vitals.</p><span class="tag">Planned next</span></div>
+        </div>
+      </section>
+
+      <section class="panel upsell">
+        <h2>Need more than the free checks?</h2>
+        <p>The free tools give you a limited number of runs. When they are used up, you can continue in the AMK Digital Agency App.</p>
+        <p><a class="btn" href="../tools/free-tools.html">All free tools</a>
+           <a class="btn ghost" href="#" data-app-path="/signup?ref=domain-overview">Create an App account</a></p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="foot">&copy; 2026 AMK Digital Agency &middot; <span>Beta / Preview</span></footer>
+</body>
+</html>

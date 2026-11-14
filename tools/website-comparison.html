@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Website Comparison Tool: Compare Two Domains Side-by-Side | AMK Digital Agency</title>
+  <meta name="description" content="Free side-by-side SEO website comparison. Compare two domains instantly across SEO health, Open PageRank, domain age, SSL security, and technical status." />
+  <link rel="icon" href="../assets/logo.png" />
+  <link rel="stylesheet" href="../tools/overview.css" />
+  <script src="../js/theme-engine.js"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/site.js" defer></script>
+  <script src="../js/tools-client.js" defer></script>
+  <script src="../js/website-comparison.js" defer></script>
+  <link rel="stylesheet" href="../demo.css" />
+  <script src="../js/demo-samples.js"></script>
+  <script src="../script.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="top">
+    <a class="brand" href="../index.html"><img src="../assets/logo.png" alt="" width="28" height="28" /> AMK Digital Agency</a>
+    <nav aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../tools/index.html">Free Tools &amp; AI Tools</a>
+      <a href="../docs/index.html">Docs</a>
+      <a href="../company/index.html">Company</a>
+      <button type="button" class="theme-toggle-btn" aria-label="Toggle light or dark theme">🌙 Theme</button>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero">
+      <h1>Website &amp; Domain Comparison</h1>
+      <p>Compare two websites head-to-head. See on-page health, domain rank (Open PageRank), domain age, security certificate and technology side by side. This uses two free runs.</p>
+      
+      <form id="cmp-form" class="search" style="max-width: 820px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) auto; gap: 12px; align-items: center;">
+        <label class="sr-only" for="cmp-d1">First Domain</label>
+        <input id="cmp-d1" class="tool-input" type="text" inputmode="url" autocomplete="off" placeholder="first-domain.com" required />
+        
+        <label class="sr-only" for="cmp-d2">Second Domain</label>
+        <input id="cmp-d2" class="tool-input" type="text" inputmode="url" autocomplete="off" placeholder="second-domain.com" required />
+        
+        <button id="cmp-run" class="tool-run-btn" type="submit">Compare Domains</button>
+      </form>
+
+      <div id="runs-line" class="runs-line" role="status" data-tool="domain-overview" hidden></div>
+      <p id="tools-unavailable" class="notice" role="status" hidden>The comparison tool is temporarily unavailable. Please try again soon.</p>
+    </section>
+
+    <div id="gate-panel" class="gate-panel" hidden></div>
+    <p id="cmp-loading" class="notice" role="status" hidden>Checking both domains, one after the other. This can take up to a minute.</p>
+    <p id="cmp-error" class="notice bad" role="alert" hidden></p>
+
+    <div id="cmp-result" hidden>
+      <p id="cmp-meta" class="meta" style="text-align: center; margin-bottom: 24px;"></p>
+
+      <section aria-labelledby="h-verdict">
+        <h2 id="h-verdict">Head-to-Head Comparison Summary</h2>
+        <div id="cmp-summary-cards" class="cards"></div>
+      </section>
+
+      <section aria-labelledby="h-side-by-side">
+        <h2 id="h-side-by-side">Detailed Domain Metrics</h2>
+        <div class="compare-grid" id="cmp-grid"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <p>&copy; 2026 <span>AMK Digital Agency</span>. Professional SEO tools and content engineering.</p>
+  </footer>
+</body>
+</html>
+

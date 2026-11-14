@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Keyword Density Checker and Readability Checker | AMK Digital Agency</title>
+  <meta name="description" content="Free keyword density checker. See the most used words and two-word phrases on a page, the word count and a reading ease score for English text." />
+  <script src="../js/theme-engine.js"></script>
+
+  <link rel="icon" href="../assets/logo.png" />
+  <link rel="stylesheet" href="../tools/overview.css" />
+  <script src="../js/config.js"></script>
+  <script src="../js/site.js" defer></script>
+  <script src="../js/tools-client.js" defer></script>
+  <script src="../js/page-tools.js" defer></script>
+  <link rel="stylesheet" href="../demo.css" />
+  <script src="../js/demo-samples.js"></script>
+  <script src="../script.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="top">
+    <a class="brand" href="../index.html"><img src="../assets/logo.png" alt="" width="28" height="28" /> AMK Digital Agency</a>
+    <nav aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="../tools/index.html">Free Tools &amp; AI Tools</a>
+      <a href="../docs/index.html">Docs</a>
+      <a href="../docs/how-to-use-the-free-tools/index.html">How to use</a>
+      <button type="button" class="theme-toggle-btn" aria-label="Toggle light or dark theme">🌙 Theme</button>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero">
+      <h1>Keyword Density and Readability Checker</h1>
+      <p>Enter a page address to count its words and see which words and phrases it uses most.</p>
+      <form id="tool-form" class="search" data-tool="keyword-density">
+        <label class="sr-only" for="tool-url">Website address</label>
+        <input id="tool-url" class="tool-input" type="text" inputmode="url" autocomplete="off" placeholder="https://example.com/page" required />
+        <button id="tool-run" class="tool-run-btn" type="submit">Check text</button>
+      </form>
+      <p id="runs-line" class="runs-line" role="status" data-tool="keyword-density" hidden></p>
+      <p id="tools-unavailable" class="notice" role="status" hidden>This tool is temporarily unavailable. Please try again soon.</p>
+    </section>
+    <div id="gate-panel" class="gate-panel" hidden></div>
+    <p id="tool-loading" class="notice" role="status" hidden>Checking. This can take a few seconds.</p>
+    <p id="tool-error" class="notice bad" role="alert" hidden></p>
+    <div id="tool-result" hidden></div>
+    <section><h2>What this tool checks</h2><div class="panel"><ul class="plain"><li>Word count</li><li>The 20 most used words with their share of the text (common words such as &quot;the&quot; are left out)</li><li>Repeated two-word phrases</li><li>Flesch reading ease for English pages. It uses a standard formula and counts syllables by rule, so treat it as a guide</li></ul></div></section>
+    <section><h2>More free tools</h2><div class="cards"><a class="card link" href="../tools/domain-overview.html"><h3>Domain Overview</h3><p>One report for a whole website: SEO health, domain rank, technical status, registration and security.</p></a><a class="card link" href="../tools/website-comparison.html"><h3>Website Comparison</h3><p>Side-by-side SEO comparison of two websites: authority, health, and security.</p></a><a class="card link" href="../tools/free-tools.html"><h3>SEO Audit, Page Analyser, AI readiness, Domain Age and Domain Rank</h3><p>Five quick checks on one page.</p></a><a class="card link" href="../tools/title-generator.html"><h3>Title Generator</h3><p>Write page titles of the right length. Runs in your browser.</p></a><a class="card link" href="../tools/meta-tags.html"><h3>Meta Tag Analyser</h3><p>Title, description, canonical, robots and social tags, with a search result preview.</p></a><a class="card link" href="../tools/headings.html"><h3>Heading Checker</h3><p>The full H1 to H6 outline of a page and any structure problems.</p></a><a class="card link" href="../tools/images.html"><h3>Image and Alt Text Checker</h3><p>Which images have no text description or no size set.</p></a><a class="card link" href="../tools/links.html"><h3>Link Checker</h3><p>Internal and external links on a page, with a broken-link test.</p></a><a class="card link" href="../tools/redirects.html"><h3>Redirect and Status Checker</h3><p>Every redirect hop and status code from the typed address to the final page.</p></a><a class="card link" href="../tools/robots-sitemap.html"><h3>Robots.txt and Sitemap Checker</h3><p>The crawl rules a site gives search engines, and its XML sitemaps.</p></a><a class="card link" href="../tools/ssl-check.html"><h3>SSL Checker</h3><p>Whether the security certificate is valid, who issued it and when it ends.</p></a><a class="card link" href="../tools/schema-social.html"><h3>Schema and Open Graph Checker</h3><p>Structured data types on a page, errors in them, and social preview tags.</p></a><a class="card link" href="../tools/technology.html"><h3>Website Technology Checker</h3><p>Systems a site is recognisably built with, its server and security headers.</p></a></div></section>
+  </main>
+
+  <footer class="foot">&copy; 2026 AMK Digital Agency &middot; <span>Beta / Preview</span></footer>
+</body>
+</html>
