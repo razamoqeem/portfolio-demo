@@ -68,13 +68,22 @@ def strip_personal(text):
     return PERSONAL_ANCHOR.sub("", text)
 
 
+# The chat widget and bot check need the website's server, which the showcase does not have.
+NO_SERVER_TAGS = re.compile(r'\s*<(?:script[^>]*src="[^"]*js/(?:chat-widget|bot-check)\.js"[^>]*></script>|link[^>]*href="[^"]*css/chat-widget\.css"[^>]*>)', re.I)
+
+
 def transform_html(text, rel_path):
     text = strip_personal(text)
-    prefix = PAGES_BASE if rel_path == "404.html" else prefix_for(rel_path)
+    text = NO_SERVER_TAGS.sub("", text)
+    prefix = "" if rel_path == "404.html" else prefix_for(rel_path)
     if rel_path == "404.html":
-        # absolute from the repository base, because a 404 page is served from any depth
-        text = ATTR.sub(lambda m: m.group(1) + PAGES_BASE + fix_target(m.group(2), "").lstrip("/") + m.group(3), text)
-        asset_prefix = PAGES_BASE
+        # A 404 page is served at any address, so its links are relative to a <base> picked in the browser:
+        # "/portfolio-demo/" on GitHub Pages, "/" on Vercel or any host that serves the demo at its root.
+        text = ATTR.sub(lambda m: m.group(1) + fix_target(m.group(2), "") + m.group(3), text)
+        base_js = ('<script>document.write(\'<base href="\' + (location.pathname.indexOf("%s") === 0 ? "%s" : "/") + \'">\');</script>'
+                   % (PAGES_BASE, PAGES_BASE))
+        text = text.replace("<head>", "<head>\n  " + base_js, 1)
+        asset_prefix = ""
     else:
         text = ATTR.sub(lambda m: m.group(1) + fix_target(m.group(2), prefix) + m.group(3), text)
         asset_prefix = prefix

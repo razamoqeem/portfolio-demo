@@ -7,6 +7,18 @@
    ============================================================================ */
 const LIVE_SITE_URL = "";
 
+/* Vercel Speed Insights (page-speed measurements, no cookies). Loaded only on Vercel:
+   GitHub Pages and local copies do not have the /_vercel/ address, so they skip it. */
+(function () {
+  var h = location.hostname;
+  if (location.protocol === 'file:' || /\.github\.io$/.test(h) || h === 'localhost' || h === '127.0.0.1') return;
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+  var s = document.createElement('script');
+  s.defer = true;
+  s.src = '/_vercel/speed-insights/script.js';
+  document.head.appendChild(s);
+})();
+
 (function () {
   'use strict';
 
