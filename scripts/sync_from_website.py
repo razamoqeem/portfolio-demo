@@ -58,7 +58,18 @@ def fix_target(target, prefix):
     return out
 
 
+# Personal contact details never go into the showcase copy (the website keeps them).
+PERSONAL_LINK = re.compile(r'<p[^>]*>\s*<a [^>]*href="(?:mailto:|tel:|https?://(?:www\.)?linkedin\.com)[^"]*"[^>]*>[^<]*</a>\s*</p>\s*', re.I)
+PERSONAL_ANCHOR = re.compile(r'<a [^>]*href="(?:mailto:|tel:|https?://(?:www\.)?linkedin\.com)[^"]*"[^>]*>([^<]*)</a>', re.I)
+
+
+def strip_personal(text):
+    text = PERSONAL_LINK.sub("", text)
+    return PERSONAL_ANCHOR.sub("", text)
+
+
 def transform_html(text, rel_path):
+    text = strip_personal(text)
     prefix = PAGES_BASE if rel_path == "404.html" else prefix_for(rel_path)
     if rel_path == "404.html":
         # absolute from the repository base, because a 404 page is served from any depth

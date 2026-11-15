@@ -94,11 +94,6 @@ See [`LICENSE`](./LICENSE) for full legal terms.
 
 ## 📬 Contact
 
-| Channel | Details |
-|---------|---------|
-| 📧 Email (Primary) | [contact details withheld](#contact) |
-| 📧 Email (Agency) | [contact details withheld](#contact) |
-| 💼 LinkedIn | [profile link withheld](#contact) |
-| 📍 Location | Lahore & Multan, Pakistan |
+Contact details are withheld in this archived copy.
 
 > **For production access, custom deployment, or enterprise licensing — contact us directly or book a strategy call via the live demo.**

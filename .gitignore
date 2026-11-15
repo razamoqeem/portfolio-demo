@@ -42,3 +42,12 @@ logs/
 *.temp
 *.bak
 *.backup
+
+# Secrets and deployment folders (the demo needs none; this keeps a mistake out of the public repo)
+.env.*
+!.env.example
+.vercel/
+*.pem
+*.key
+*.db
+*.sqlite*

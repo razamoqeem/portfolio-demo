@@ -40,6 +40,11 @@ files alone: `script.js`, `demo.css`, `js/config.js`, `js/tools-client.js`, `js/
 `README.md`, `LICENSE`. Edit `PAGES_BASE` at the top of the script if the showcase moves from
 `/portfolio-demo/` to its own domain.
 
+## Environment variables
+
+None. The showcase is static files with no server and no build step, so it needs no `.env` file and no secrets.
+The only setting, `LIVE_SITE_URL` in `script.js`, is a public address. `.gitignore` keeps any `.env` file out of this public repository.
+
 ## Folder notes
 
 | Folder or file | Purpose |
