@@ -1,0 +1,168 @@
+/* AMK Digital Agency Website: shared navigation (every page).
+   Colours from css/theme.css (with fall-backs). No inline styles anywhere.
+   Without JavaScript: desktop dropdowns still open on hover/keyboard focus; on phones the full menu shows as a list.
+   With JavaScript (js/site-nav.js adds html.amk-js): phone menu folds behind a button, dropdowns open by tap. */
+.amk-nav {
+  --n-bg: color-mix(in srgb, var(--theme-surface, #fff) 78%, transparent);
+  --n-solid: var(--theme-surface, #fff);
+  --n-text: var(--theme-text, #0f172a);
+  --n-muted: var(--theme-text-muted, #475569);
+  --n-line: var(--theme-border, #e2e8f0);
+  --n-soft: var(--theme-surface-subtle, #f1f5f9);
+  --n-brand: var(--theme-brand, #4f46e5);
+  --n-on-brand: var(--theme-on-brand, #fff);
+  --n-radius: var(--theme-radius-lg, 16px);
+  position: sticky; top: 0; z-index: 80;
+  padding: 10px var(--gutter, 16px) 0;
+  font-family: var(--theme-font-body, system-ui, sans-serif);
+  pointer-events: none;            /* the bar itself takes clicks, not the empty strip around it */
+}
+.amk-nav *, .amk-nav *::before, .amk-nav *::after { box-sizing: border-box; }
+.amk-nav-inner {
+  pointer-events: auto;
+  position: relative;
+  display: flex; align-items: center; gap: 12px;
+  max-width: var(--container, 1200px); margin: 0 auto;
+  padding: 8px 10px 8px 16px;
+  background: var(--n-bg);
+  -webkit-backdrop-filter: saturate(180%) blur(16px); backdrop-filter: saturate(180%) blur(16px);
+  border: 1px solid var(--n-line); border-radius: 999px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+.amk-scrolled .amk-nav-inner { box-shadow: var(--theme-shadow-md, 0 6px 20px rgba(15, 23, 42, 0.08)); }
+
+.amk-brand { display: inline-flex; align-items: center; gap: 10px; flex: none; color: var(--n-text); text-decoration: none; font-weight: 700; letter-spacing: -0.02em; white-space: nowrap; }
+.amk-brand img { width: 28px; height: 28px; border-radius: 7px; }
+.amk-brand:hover { color: var(--n-text); }
+
+.amk-menu { display: flex; align-items: center; flex: 1; gap: 8px; }
+.amk-top { display: flex; align-items: center; gap: 2px; margin: 0 auto; padding: 0; list-style: none; }
+.amk-top > li { position: relative; margin: 0; list-style: none; }
+.amk-top > li::marker { content: ""; }
+.amk-nl {
+  display: inline-flex; align-items: center; padding: 8px 14px; border-radius: 999px;
+  color: var(--n-text); text-decoration: none; font-size: 0.9375rem; font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.amk-nl:hover, .amk-dd:hover > .amk-nl, .amk-dd.is-open > .amk-nl { background: var(--n-soft); color: var(--n-text); }
+.amk-nl.is-active { color: var(--n-brand); font-weight: 600; }
+.amk-nl:focus-visible, .amk-caret:focus-visible, .amk-mi:focus-visible, .amk-burger:focus-visible, .amk-cta:focus-visible { outline: 3px solid var(--n-brand); outline-offset: 2px; }
+
+.amk-caret {
+  display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; margin-left: -8px;
+  padding: 0; border: 0; border-radius: 999px; background: transparent; color: var(--n-muted); cursor: pointer;
+}
+.amk-caret svg { width: 15px; height: 15px; transition: transform 0.25s ease; }
+.amk-dd:hover .amk-caret svg, .amk-dd.is-open .amk-caret svg, .amk-dd:focus-within .amk-caret svg { transform: rotate(180deg); }
+
+/* ── Dropdown panels (desktop) ───────────────────────────── */
+.amk-panel {
+  position: absolute; top: calc(100% + 12px); left: 50%;
+  width: min(360px, calc(100vw - 32px));
+  padding: 10px;
+  background: var(--n-solid); color: var(--n-text);
+  border: 1px solid var(--n-line); border-radius: var(--n-radius);
+  box-shadow: var(--theme-shadow-lg, 0 24px 48px rgba(15, 23, 42, 0.14));
+  opacity: 0; visibility: hidden; transform: translate(-50%, 8px) scale(0.98); transform-origin: top center;
+  /* closing waits 0.15 s, so moving the cursor from the link into the panel never closes it */
+  transition: opacity 0.2s ease 0.15s, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1) 0.15s, visibility 0s linear 0.35s;
+  z-index: 2;
+}
+.amk-panel::before { content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 14px; }   /* invisible bridge over the gap */
+.amk-dd:hover > .amk-panel, .amk-dd:focus-within > .amk-panel, .amk-dd.is-open > .amk-panel {
+  opacity: 1; visibility: visible; transform: translate(-50%, 0) scale(1);
+  transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s;
+}
+.amk-js .amk-dd.is-closed > .amk-panel { opacity: 0; visibility: hidden; }   /* Escape closes even while hovered */
+.amk-panel-wide { width: min(860px, calc(100vw - 32px)); display: grid; grid-template-columns: 230px 1fr; gap: 10px; }
+
+.amk-feature {
+  display: flex; flex-direction: column; gap: 8px; padding: 18px; border-radius: 12px;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--n-brand) 16%, var(--n-solid)), color-mix(in srgb, var(--n-brand) 4%, var(--n-solid)));
+  color: var(--n-text); text-decoration: none;
+}
+.amk-feature b { font-size: 1.0625rem; }
+.amk-feature span { color: var(--n-muted); font-size: 0.875rem; line-height: 1.5; }
+.amk-feature em { margin-top: auto; display: inline-flex; align-items: center; gap: 6px; color: var(--n-brand); font-style: normal; font-weight: 600; font-size: 0.875rem; }
+.amk-feature:hover em { gap: 10px; }
+
+.amk-mgroups { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 4px 10px; }
+.amk-mtitle { margin: 6px 10px 4px; color: var(--n-muted); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+.amk-mgroup ul, .amk-mlist { margin: 0; padding: 0; list-style: none; }
+.amk-mgroup li, .amk-mlist li { margin: 0; }
+.amk-mgroup li::marker, .amk-mlist li::marker { content: ""; }
+.amk-mi {
+  display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px; border-radius: 10px;
+  color: var(--n-text); text-decoration: none; transition: background-color 0.15s ease;
+}
+.amk-mi:hover, .amk-mi[aria-current="page"] { background: var(--n-soft); color: var(--n-text); }
+.amk-mi span { display: flex; flex-direction: column; min-width: 0; }
+.amk-mi b { font-size: 0.875rem; font-weight: 600; }
+.amk-mi small { color: var(--n-muted); font-size: 0.75rem; line-height: 1.4; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.amk-panel-wide .amk-mi { padding: 6px 10px; }
+.amk-panel-wide { max-height: calc(100vh - 96px); overflow-y: auto; overscroll-behavior: contain; }
+.amk-mi[aria-current="page"] b { color: var(--n-brand); }
+.amk-nav .ic { width: 20px; height: 20px; flex: none; margin-top: 1px; color: var(--n-brand); }
+.amk-nav .ic-s { width: 16px; height: 16px; margin: 0; color: currentColor; }
+.amk-nav .ic-l { width: 28px; height: 28px; }
+.amk-all { grid-column: 1 / -1; justify-self: end; display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; color: var(--n-brand); font-weight: 600; font-size: 0.875rem; text-decoration: none; }
+
+/* ── Right side: call to action + theme ──────────────────── */
+.amk-actions { display: flex; align-items: center; gap: 8px; flex: none; }
+.amk-cta {
+  display: inline-flex; align-items: center; padding: 8px 16px; border-radius: 999px;
+  background: var(--n-brand); color: var(--n-on-brand); font-weight: 600; font-size: 0.875rem; text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.amk-cta:hover { color: var(--n-on-brand); transform: translateY(-1px); box-shadow: var(--theme-glow, none); }
+.amk-nav .theme-toggle-btn {
+  display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px;
+  border: 1px solid var(--n-line); background: var(--n-soft); color: var(--n-text);
+  font: inherit; font-size: 0.8125rem; font-weight: 600; cursor: pointer;
+}
+
+.amk-burger { display: none; }
+
+/* ── Phones and small tablets ────────────────────────────── */
+@media (max-width: 979px) {
+  .amk-nav-inner { flex-wrap: wrap; border-radius: 22px; }
+  .amk-js .amk-burger {
+    display: inline-flex; flex-direction: column; justify-content: center; gap: 4px; margin-left: auto;
+    width: 42px; height: 42px; padding: 0 11px; border: 1px solid var(--n-line); border-radius: 999px; background: var(--n-soft); cursor: pointer;
+  }
+  .amk-burger span { display: block; height: 2px; border-radius: 2px; background: var(--n-text); transition: transform 0.25s ease, opacity 0.2s ease; }
+  .amk-nav.is-open .amk-burger span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .amk-nav.is-open .amk-burger span:nth-child(2) { opacity: 0; }
+  .amk-nav.is-open .amk-burger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  .amk-menu { flex-basis: 100%; flex-direction: column; align-items: stretch; gap: 10px; padding: 8px 0 6px; }
+  .amk-js .amk-menu { display: none; }
+  .amk-js .amk-nav.is-open .amk-menu { display: flex; animation: amk-drop 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+  .amk-js .amk-nav.is-open .amk-nav-inner { max-height: calc(100vh - 24px); overflow-y: auto; overscroll-behavior: contain; }
+  .amk-top { flex-direction: column; align-items: stretch; margin: 0; gap: 2px; }
+  .amk-top > li { display: flex; flex-wrap: wrap; align-items: center; }
+  .amk-nl { flex: 1; padding: 12px 14px; border-radius: 12px; font-size: 1rem; }
+  .amk-caret { width: 44px; height: 44px; margin: 0; border-radius: 12px; }
+  .amk-panel, .amk-panel-wide {
+    position: static; flex-basis: 100%; width: auto; transform: none; box-shadow: none; border: 0;
+    padding: 2px 0 8px 8px; background: transparent; display: block;
+    opacity: 1; visibility: visible; transition: none;
+  }
+  .amk-panel::before { display: none; }
+  .amk-js .amk-dd > .amk-panel { display: none; }
+  .amk-js .amk-dd.is-open > .amk-panel { display: block; }
+  .amk-dd:hover > .amk-panel, .amk-dd:focus-within > .amk-panel, .amk-dd.is-open > .amk-panel { transform: none; }
+  .amk-panel-wide { max-height: none; overflow: visible; }
+  .amk-menu, .amk-top, .amk-top > li, .amk-panel, .amk-mgroups, .amk-mgroup, .amk-mgroup ul, .amk-mi { min-width: 0; max-width: 100%; }
+  .amk-feature { display: none; }
+  .amk-mgroups { display: block; }
+  .amk-actions { justify-content: space-between; padding: 6px 4px 2px; border-top: 1px solid var(--n-line); }
+}
+@keyframes amk-drop { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .amk-panel, .amk-dd:hover > .amk-panel, .amk-caret svg, .amk-nav-inner { transition: none; }
+  .amk-js .amk-nav.is-open .amk-menu { animation: none; }
+}
+@media print { .amk-nav { display: none; } }

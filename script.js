@@ -70,13 +70,15 @@ const LIVE_SITE_URL = "";
     a.setAttribute('data-demo-live', 'home');
     setLink(a, live ? live + '/' : '');
 
+    var actions = document.querySelector('.amk-nav .amk-actions');
     var list = document.querySelector('.nav-list');
     var topNav = document.querySelector('.top nav');
     var toolNav = document.querySelector('.tool-header-nav');
     var topBar = document.querySelector('.top-bar');
     var links = document.querySelector('.top .navlinks');
 
-    if (list) {
+    if (actions) { var toggle = actions.querySelector('.theme-toggle-btn'); actions.insertBefore(a, toggle || null); }
+    else if (list) {
       var li = el('li'); li.appendChild(a);
       var last = list.lastElementChild;
       list.insertBefore(li, last && last.querySelector('.theme-toggle-btn') ? last : null);
@@ -132,11 +134,25 @@ const LIVE_SITE_URL = "";
     if (a) setLink(a, liveToolUrl());
   }
 
+  /* The Contact form needs the website's server: in the showcase it explains that instead of failing. */
+  var CONTACT_NOTE = 'This is a static copy, so this form cannot send messages. Please use the Contact page on the live website.';
+  function contactForm(e) {
+    if (!e.target || e.target.id !== 'contact-form') return false;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    var msg = document.getElementById('contact-msg');
+    if (msg) { msg.textContent = CONTACT_NOTE; msg.className = 'x-form-msg is-error'; }
+    if (live) { var go = el('a', 'demo-live-link', 'Open the live Contact page ↗'); setLink(go, live + '/contact/'); if (msg) { msg.appendChild(document.createTextNode(' ')); msg.appendChild(go); } }
+    else toast(NOT_SET);
+    return true;
+  }
+
   function wire() {
     document.addEventListener('input', function (e) {
       if (e.target && SAMPLE_FIELDS.indexOf(e.target.id) !== -1) { remember(e.target); refreshBannerLink(); }
     }, true);
     document.addEventListener('submit', function (e) {
+      if (contactForm(e)) return;
       if (e.target && e.target.querySelectorAll) e.target.querySelectorAll('input').forEach(useSample);
     }, true);
     document.addEventListener('click', function (e) {

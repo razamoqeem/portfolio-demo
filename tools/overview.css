@@ -51,7 +51,7 @@ body {
   line-height: 1.6;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
-a { color: var(--accent); }
+a { color: var(--theme-link, var(--accent)); }
 a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 .sr-only, .skip-link { position: absolute; left: -9999px; }
 .skip-link:focus { left: 8px; top: 8px; background: var(--panel); padding: 8px 12px; z-index: 10; }
@@ -373,3 +373,9 @@ li::marker { color: var(--accent); }
   letter-spacing: var(--letter-spacing-badge);
   margin-left: 6px;
 }
+
+/* Tools hub: category chips under the hero */
+.x-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 8px 0 0; }
+.x-chips a { padding: 8px 16px; border: 1px solid var(--border); border-radius: 999px; background: var(--panel); color: var(--text); text-decoration: none; font-weight: 600; font-size: var(--fs-sm); transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease; }
+.x-chips a:hover { border-color: var(--accent); color: var(--theme-link, var(--accent)); transform: translateY(-1px); }
+section[id] { scroll-margin-top: 96px; }

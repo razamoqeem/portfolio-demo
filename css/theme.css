@@ -24,53 +24,57 @@
 /* ── 1. COLOURS: LIGHT (default) ─────────────────────────── */
 :root {
   /* Brand */
-  --theme-brand:          #4b43d6;   /* buttons, links, highlights   */
-  --theme-brand-strong:   #3f38b8;   /* hover / pressed               */
+  --theme-brand:          #4f46e5;   /* buttons, links, highlights   */
+  --theme-brand-strong:   #4338ca;   /* hover / pressed               */
   --theme-on-brand:       #ffffff;   /* text placed on the brand colour */
-  --theme-brand-2:        #00a88c;   /* second accent (small details) */
+  --theme-brand-2:        #0ea5e9;   /* second accent (small details) */
+
+  --theme-link:           #4338ca;   /* text links (readable on page and cards) */
 
   /* States */
-  --theme-success:        #0f7a5c;
+  --theme-success:        #15803d;
   --theme-warning:        #b45309;
-  --theme-danger:         #e11d48;
+  --theme-danger:         #dc2626;
 
   /* Neutrals */
   --theme-page:           #f8fafc;   /* page background               */
-  --theme-page-alt:       #eef2f7;   /* alternate band / input fill   */
+  --theme-page-alt:       #eef2ff;   /* alternate band / input fill   */
   --theme-surface:        #ffffff;   /* cards, header, footer         */
   --theme-surface-subtle: #f1f5f9;   /* quiet panels, ghost buttons   */
   --theme-border:         #e2e8f0;
   --theme-border-strong:  #cbd5e1;
   --theme-text:           #0f172a;   /* headings and body text        */
   --theme-text-soft:      #334155;   /* paragraphs                    */
-  --theme-text-muted:     #64748b;   /* labels, notes                 */
+  --theme-text-muted:     #475569;   /* labels, notes                 */
   --theme-text-faint:     #94a3b8;   /* placeholders                  */
 
   /* Shadows (part of the look, so they live here) */
   --theme-shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
   --theme-shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
   --theme-shadow-lg: 0 20px 48px rgba(15, 23, 42, 0.10);
+  --theme-glow:      0 10px 40px rgba(79, 70, 229, 0.18);
 }
 
 /* ── 2. COLOURS: DARK ────────────────────────────────────── */
 html[data-theme="dark"],
 html.dark {
-  --theme-brand:          #6366f1;
-  --theme-brand-strong:   #818cf8;
-  --theme-on-brand:       #ffffff;
-  --theme-brand-2:        #2dd4bf;
+  --theme-brand:          #818cf8;
+  --theme-brand-strong:   #a5b4fc;
+  --theme-on-brand:       #0b1120;
+  --theme-brand-2:        #38bdf8;
+  --theme-link:           #a5b4fc;
 
-  --theme-success:        #10b981;
+  --theme-success:        #22c55e;
   --theme-warning:        #f59e0b;
-  --theme-danger:         #f43f5e;
+  --theme-danger:         #f87171;
 
-  --theme-page:           #0b0f19;
-  --theme-page-alt:       #101626;
-  --theme-surface:        #131b2e;
-  --theme-surface-subtle: #1c253d;
-  --theme-border:         #232d45;
+  --theme-page:           #0b1120;
+  --theme-page-alt:       #0f172a;
+  --theme-surface:        #111827;
+  --theme-surface-subtle: #1e293b;
+  --theme-border:         #1e293b;
   --theme-border-strong:  #334155;
-  --theme-text:           #f8fafc;
+  --theme-text:           #f1f5f9;
   --theme-text-soft:      #cbd5e1;
   --theme-text-muted:     #94a3b8;
   --theme-text-faint:     #64748b;
@@ -78,6 +82,7 @@ html.dark {
   --theme-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.30);
   --theme-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.40);
   --theme-shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.60);
+  --theme-glow:      0 10px 40px rgba(129, 140, 248, 0.22);
 }
 
 /* ── 3. FONTS ────────────────────────────────────────────────

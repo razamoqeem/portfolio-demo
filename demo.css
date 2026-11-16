@@ -66,3 +66,7 @@ body .demo-banner a.demo-live-link { margin-left: auto; }
 @media (max-width: 480px) {
   body .demo-banner a.demo-live-link { margin-left: 0; width: 100%; justify-content: center; }
 }
+
+/* New shared navigation: the live-site button sits beside the theme switch. */
+.amk-actions > a.demo-live-link { white-space: nowrap; }
+@media (max-width: 1180px) { .amk-nav .amk-actions > .amk-cta { display: none; } }
