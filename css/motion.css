@@ -89,3 +89,33 @@
   .mx .mx-reveal, .mx [data-mx="words"] .mx-w { opacity: 1 !important; transform: none !important; }
   .mx-progress, .mx-hero::before { display: none; }
 }
+
+/* Logo A: the rising line draws itself once on load; the dot pops in after it. */
+.mx .amk-logo-line { stroke-dasharray: 100; stroke-dashoffset: 100; animation: amk-draw 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.15s forwards; }
+.mx .amk-logo-dot { opacity: 0; transform-box: fill-box; transform-origin: center; animation: amk-dot 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 0.95s forwards; }
+@keyframes amk-draw { to { stroke-dashoffset: 0; } }
+@keyframes amk-dot { from { opacity: 0; transform: scale(0.2); } to { opacity: 1; transform: none; } }
+
+/* Cards: a soft light follows the mouse (js/site-fx.js sets --mx and --my). */
+@media (hover: hover) and (pointer: fine) {
+  .x-card, .x-feature { position: relative; isolation: isolate; }
+  .x-card::after, .x-feature::after {
+    content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 0.3s ease;
+    background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--theme-brand) 14%, transparent), transparent 70%);
+  }
+  .x-card:hover::after, .x-feature:hover::after { opacity: 1; }
+}
+
+/* Tap ripple on buttons (touch and pen). */
+.x-btn, .amk-cta, .x-block { position: relative; overflow: hidden; }
+.fx-ripple {
+  position: absolute; left: var(--rx); top: var(--ry); width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%;
+  background: currentColor; opacity: 0.28; pointer-events: none; transform: scale(0); animation: fx-ripple 0.6s ease-out forwards;
+}
+@keyframes fx-ripple { to { transform: scale(14); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .mx .amk-logo-line { animation: none; stroke-dashoffset: 0; }
+  .mx .amk-logo-dot { animation: none; opacity: 1; }
+  .fx-ripple { display: none; }
+}

@@ -226,6 +226,7 @@ code {
 .page-body.is-designed { max-width: var(--container); padding-top: clamp(24px, 4vw, 48px); }
 .page-body.is-designed > * { margin: 0; }
 .page-body.is-designed > .x-sec, .page-body.is-designed > .x-cta { margin-top: clamp(64px, 9vw, 120px); }
+.page-body.is-designed > .x-statement { margin-inline: auto; }
 
 /* Buttons */
 .x-btn {
@@ -354,6 +355,53 @@ code {
 @media (max-width: 860px) {
   .x-hero-split, .x-contact { grid-template-columns: 1fr; }
   .x-hero-visual { max-width: 520px; }
+}
+
+/* Hero "growth stack": four broken blocks the visitor fixes (js/site-fx.js). Sizes are fixed so nothing shifts. */
+.x-stack { --rise: 1; }
+.x-stack-hint { margin: 0 0 10px; color: var(--c-muted); font-size: 0.875rem; line-height: 1.5; }
+.x-stack-chart { height: 96px; margin: 0 0 12px; border-radius: 12px; background: var(--c-surface-subtle); overflow: hidden; }
+.x-stack-chart svg { display: block; width: 100%; height: 100%; }
+.x-stack-grid { fill: none; stroke: var(--c-line); stroke-width: 1; }
+.x-stack-rise { transform-box: view-box; transform-origin: 0 120px; transform: scaleY(var(--rise)); transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.x-stack-line { fill: none; stroke: var(--theme-brand); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.x-stack-dot { fill: var(--theme-brand-2); transform-box: view-box; transform: translateY(calc((1 - var(--rise)) * 104px)); transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.x-stack-blocks { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.x-stack-blocks li { margin: 0; }
+.x-stack-blocks li::marker { content: ""; }
+.x-block {
+  display: flex; align-items: center; gap: 10px; width: 100%; min-height: 64px; margin: 0; padding: 10px 12px; text-align: left; cursor: pointer;
+  border: 1px dashed color-mix(in srgb, var(--theme-warning) 55%, transparent); border-radius: 12px;
+  background: color-mix(in srgb, var(--theme-warning) 8%, var(--c-surface)); color: var(--c-ink); font: inherit;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease, border-color 0.3s ease;
+}
+.x-block:hover { border-color: var(--theme-warning); }
+.x-block:focus-visible { outline: 3px solid var(--theme-brand); outline-offset: 2px; }
+.x-block-ic .ic { width: 20px; height: 20px; color: var(--theme-warning); }
+.x-block-text { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.x-block-text b { font-size: 0.875rem; line-height: 1.3; }
+.x-block-text small { font-size: 0.75rem; color: var(--theme-warning); }
+.x-block-ok, .x-block-mark { display: none; }
+.x-block[aria-pressed="true"] {
+  transform: none; border-style: solid; border-color: color-mix(in srgb, var(--c-success) 55%, transparent);
+  background: color-mix(in srgb, var(--c-success) 10%, var(--c-surface));
+}
+.x-block[aria-pressed="true"] .x-block-ic .ic { color: var(--c-success); }
+.x-block[aria-pressed="true"] .x-block-bad { display: none; }
+.x-block[aria-pressed="true"] .x-block-ok { display: block; color: var(--c-success); }
+.x-block[aria-pressed="true"] .x-block-mark { display: block; }
+.x-block-mark .ic { width: 20px; height: 20px; color: var(--c-success); }
+.x-stack-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px; min-height: 44px; }
+.x-stack-score { margin: 0; font-size: 0.875rem; color: var(--c-muted); }
+.x-stack-score b { color: var(--c-ink); }
+.x-stack-cta { padding: 10px 16px; font-size: 0.875rem; }
+.x-stack.is-done .x-stack-cta { animation: x-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: var(--theme-glow); }
+@keyframes x-pop { 0% { transform: scale(0.94); } 60% { transform: scale(1.04); } 100% { transform: none; } }
+@media (max-width: 420px) { .x-stack-blocks { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) {
+  .x-block, .x-stack-rise, .x-stack-dot { transition: none; }
+
+  .x-stack.is-done .x-stack-cta { animation: none; }
 }
 
 /* Colour picker classes for the names in content/settings.json */

@@ -33,7 +33,7 @@
 .amk-scrolled .amk-nav-inner { box-shadow: var(--theme-shadow-md, 0 6px 20px rgba(15, 23, 42, 0.08)); }
 
 .amk-brand { display: inline-flex; align-items: center; gap: 10px; flex: none; color: var(--n-text); text-decoration: none; font-weight: 700; letter-spacing: -0.02em; white-space: nowrap; }
-.amk-brand img { width: 28px; height: 28px; border-radius: 7px; }
+.amk-brand img, .amk-brand .amk-logo { width: 28px; height: 28px; border-radius: 7px; flex: none; }
 .amk-brand:hover { color: var(--n-text); }
 
 .amk-menu { display: flex; align-items: center; flex: 1; gap: 8px; }

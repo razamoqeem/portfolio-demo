@@ -26,6 +26,12 @@ SOURCE = sys.argv[1] if len(sys.argv) > 1 else os.path.normpath(os.path.join(HER
 # GitHub Pages project sites live under /<repository>/. Use "/" for a custom domain.
 PAGES_BASE = "/portfolio-demo/"
 NOINDEX = True
+# The live website's address (https://..., no trailing slash). When set, every page gets a canonical
+# link to the same page on the live site, so search engines credit the live site, not this copy.
+# Set it here or in the LIVE_SITE_URL environment variable. Empty: no canonical links (pages stay noindex).
+LIVE_SITE_URL = os.environ.get("LIVE_SITE_URL", "").strip().rstrip("/")
+if LIVE_SITE_URL.startswith("https://"):
+    NOINDEX = False   # canonical links replace noindex (the two together send mixed signals)
 
 # The showcase's own files: never overwritten by a sync.
 PROTECTED = {"script.js", "demo.css", "README.md", "LICENSE", ".gitignore", "js/config.js", "js/tools-client.js", "js/demo-samples.js"}
@@ -91,6 +97,14 @@ def transform_html(text, rel_path):
     # the two writing tools: drop the website's "being rebuilt" switch-off script
     text = re.sub(r"<script>\s*/\* This tool needs the tools service.*?</script>", "", text, flags=re.S)
 
+    if LIVE_SITE_URL.startswith("https://") and rel_path != "404.html":
+        live_path = "/" + (rel_path[:-len("index.html")] if rel_path.endswith("index.html") else rel_path)
+        canonical = '<link rel="canonical" href="%s%s" />' % (LIVE_SITE_URL, live_path)
+        if re.search(r'<link rel="canonical"[^>]*>', text):
+            text = re.sub(r'<link rel="canonical"[^>]*>', canonical, text, count=1)
+        else:
+            text = text.replace("</head>", "  " + canonical + "\n</head>", 1)
+
     if NOINDEX:
         if re.search(r'<meta\s+name="robots"', text):
             text = re.sub(r'(<meta\s+name="robots"\s+content=")[^"]*(")', r"\1noindex, nofollow\2", text)
@@ -140,6 +154,10 @@ def main():
     if NOINDEX:
         with open(os.path.join(HERE, "robots.txt"), "w", encoding="utf-8", newline="\n") as f:
             f.write("# Static showcase copy: not for search engines.\nUser-agent: *\nDisallow: /\n")
+    else:
+        # Crawlers must reach the pages to see their canonical links to the live site.
+        with open(os.path.join(HERE, "robots.txt"), "w", encoding="utf-8", newline="\n") as f:
+            f.write("# Static showcase copy. Every page names its live original (canonical link).\nUser-agent: *\nAllow: /\n")
     print("Synced %d files from %s" % (copied, SOURCE))
 
 
