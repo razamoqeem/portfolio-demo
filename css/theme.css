@@ -86,9 +86,18 @@ html.dark {
 }
 
 /* ── 3. FONTS ────────────────────────────────────────────────
-   These are names only. A web font shows only if the page loads it
-   (today the older pages load Inter from Google Fonts in base.css;
-   the CMS pages load no web font, so they use the device font).   */
+   Inter is self-hosted: assets/fonts/inter-latin-var.woff2 (one file, every
+   weight from 300 to 800, Latin letters; licence in assets/fonts/OFL.txt).
+   Letters outside that range use the device font. The address is relative
+   to this file, so it works on the Website, the App and the demo copy.   */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url("../assets/fonts/inter-latin-var.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 :root {
   --theme-font-body:    'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --theme-font-heading: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
