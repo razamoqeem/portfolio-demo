@@ -13,7 +13,10 @@
   --n-on-brand: var(--theme-on-brand, #fff);
   --n-radius: var(--theme-radius-lg, 16px);
   position: sticky; top: 0; z-index: 80;
-  padding: 10px var(--gutter, 16px) 0;
+  /* The pill's inner padding (16px + 1px border) is taken off the side space, so the logo and the
+     theme button line up exactly with the page content below (--container and --gutter). */
+  --pill-pad: 17px;
+  padding: 10px max(4px, calc(var(--gutter, 16px) - var(--pill-pad))) 0;
   font-family: var(--theme-font-body, system-ui, sans-serif);
   pointer-events: none;            /* the bar itself takes clicks, not the empty strip around it */
 }
@@ -22,13 +25,16 @@
   pointer-events: auto;
   position: relative;
   display: flex; align-items: center; gap: 12px;
-  max-width: var(--container, 1200px); margin: 0 auto;
-  padding: 8px 10px 8px 16px;
+  max-width: none; margin: 0 auto;
+  padding: 8px 16px;
   background: var(--n-bg);
   -webkit-backdrop-filter: saturate(180%) blur(16px); backdrop-filter: saturate(180%) blur(16px);
   border: 1px solid var(--n-line); border-radius: 999px;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
   transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+@media (min-width: 1024px) {
+  .amk-nav-inner { max-width: calc(var(--container, 1200px) - 2 * var(--gutter, 16px) + 2 * var(--pill-pad)); }
 }
 .amk-scrolled .amk-nav-inner { box-shadow: var(--theme-shadow-md, 0 6px 20px rgba(15, 23, 42, 0.08)); }
 

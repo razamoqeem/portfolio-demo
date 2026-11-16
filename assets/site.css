@@ -299,7 +299,9 @@ code {
 .x-feature .ic, .x-card > .ic { width: 40px; height: 40px; padding: 9px; border-radius: 12px; color: var(--theme-brand); background: color-mix(in srgb, var(--theme-brand) 10%, transparent); }
 
 /* Cards */
-.x-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: var(--grid-gap); }
+.x-cards { display: grid; grid-template-columns: 1fr; gap: var(--grid-gap); }
+@media (min-width: 640px) { .x-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .x-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .x-cards-3 { grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); }
 .x-card { display: flex; flex-direction: column; gap: 10px; padding: 26px; border: 1px solid var(--c-line); border-radius: 18px; background: var(--c-surface); color: var(--c-ink); text-decoration: none; }
 .x-card h2, .x-card h3 { margin: 6px 0 0; font-size: 1.2rem; letter-spacing: -0.015em; }
